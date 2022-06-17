@@ -7,6 +7,11 @@ const PostSchema = new mongoose.Schema({
             required: true,
             unique: true
         },
+        // 채용정보 작성자
+        companyname: {
+            type: String,
+            required: true
+        },
         // 채용정보 썸네일
         thumbnail: {
             type: String,
