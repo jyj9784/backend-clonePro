@@ -1,5 +1,4 @@
 const express = require('express');
-// const aws = require('aws-sdk');
 const connect = require('./schemas/');
 const cors = require('cors');
 const morgan = require('morgan');
