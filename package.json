@@ -1,0 +1,23 @@
+{
+  "name": "backend-clonepro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/selim-jo/backend-clonePro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/selim-jo/backend-clonePro/issues"
+  },
+  "homepage": "https://github.com/selim-jo/backend-clonePro#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
