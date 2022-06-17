@@ -1,3 +1,5 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const User = require('../schemas/user');
 const CompanyUser = require('../schemas/companyuser');
@@ -5,10 +7,11 @@ const router = express.Router();
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.SECRET_KEY;
-const dotenv = require('dotenv');
 const authMiddleware = require('../middlewares/auth-middleware');
 const Bcrypt = require('bcrypt');
-dotenv.config();
+
+
+// console.log(process.env.SECRET_KEY)
 
 
 //회원가입 양식
@@ -16,18 +19,38 @@ const postUsersSchema = Joi.object({
   userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required(),
   password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$'))
   .required(),
-  confirmPassword: Joi.string().required(),
+  confirmpassword:Joi.string().required(),
+  username: Joi.string().required(),
   profileimage: Joi.string(),
+  position:Joi.number().required()
+
 });
 
-//회원가입 - 개인
-router.post('/api/user/signup', async (req, res) => {
-  try {
-    const { userid, password, confirmPassword ,username, profileimage, position } =
-      await postUsersSchema.validateAsync(req.body);
-    // console.log({ userid, password, confirmPassword, profileimage });
+// 회원가입 양식2
+const postUsersSchema2 = Joi.object({
+  userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required(),
+  password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$'))
+  .required(),
+  confirmpassword:Joi.string().required(),
+  username: Joi.string().required(),
+  profileimage: Joi.string(),
+  position:Joi.number().required(),
+  address: Joi.string().required(),
+  companyname:Joi.string().required(),
+  intro: Joi.string().required(),
+  image:Joi.string().required()
 
-    if (password !== confirmPassword) {
+});
+
+
+//회원가입 - 개인
+router.post('/user/signup', async (req, res) => {
+  try {
+    const { userid, password, confirmpassword ,username, profileimage, position } =
+      await postUsersSchema.validateAsync(req.body);
+    console.log({ userid, password, confirmpassword, profileimage });
+
+    if (password !== confirmpassword) {
       return res.status(400).send({
         errorMessage: '패스워드가 패스워드 확인란과 동일하지 않습니다.',
       });
@@ -45,7 +68,7 @@ router.post('/api/user/signup', async (req, res) => {
 
     const user = new User({ userid, password: hashPassword, profileimage });
     await user.save();
-    res.status(201).send({ message: '회원가입 완성' });
+    res.status(201).send({ success: true, "iscompany":false, "msg": "회원가입을 성공하였습니다" });
   } catch (error) {
     return res.status(400).send(
       console.error(error)
@@ -57,12 +80,12 @@ router.post('/api/user/signup', async (req, res) => {
 
 
 //회원가입 - 기업
-router.post('/api/user/company/signup', async (req, res) => {
+router.post('/user/company/signup', async (req, res) => {
   try {
     const { userid, password, confirmpassword, profileimage, intro, image, address } =
-      await postUsersSchema.validateAsync(req.body);
+      await postUsersSchema2.validateAsync(req.body);
 
-    if (password !== confirmPassword) {
+    if (password !== confirmpassword) {
       return res.status(400).send({
         errorMessage: '패스워드가 패스워드 확인란과 동일하지 않습니다.',
       });
@@ -80,7 +103,7 @@ router.post('/api/user/company/signup', async (req, res) => {
 
     const cp_user = new CompanyUser({ userid, password: hashPassword, profileimage, intro, image, address });
     await cp_user.save();
-    res.status(201).send({ message: '회원가입 완성' });
+    res.status(201).send({  success: true, "iscompany":true, "msg": "회원가입을 성공하였습니다" });
   } catch (error) {
     return res.status(400).send(
       console.error(error)
@@ -98,21 +121,63 @@ router.post('/user/login', async (req, res) => {
   const user = await User.findOne({ userid });
   const cp_user = await CompanyUser.findOne({ userid });
 
-  if (!user||!cp_user) {
+  console.log(user,"cp_user:",cp_user)
+
+
+  let iscompany = ''
+
+  if (user){
+
+   iscompnay = false
+  }
+  
+  if (cp_user){
+
+    iscompany = true
+  }
+
+  if (!user&&!cp_user) {
     return res.status(400).send({
       errorMessage: '아이디 또는 비밀번호를 확인해주세요.',
     });
   }
 
-  const validPassword = await Bcrypt.compare(password, user.password);
-  // console.log(validPassword);
+  let validPassword = ''
+
+  if (user){
+
+    validPassword = await Bcrypt.compare(password, user.password);
+
+  }
+
+  if (cp_user){
+
+    validPassword = await Bcrypt.compare(password, cp_user.password);
+
+  }
+
+  console.log(validPassword);
 
   if (!validPassword) {
     return res.send('비밀번호가 틀렸습니다..');
   }
 
-  const token = jwt.sign({ userid: user.userid }, process.env.SECRET_KEY);
-  res.send({ token });
+  let token = ''
+
+  if (user){
+
+    token = jwt.sign({ userid: user.userid }, process.env.SECRET_KEY);
+  }
+
+  if (cp_user){
+
+    token = jwt.sign({userid: cp_user.userid}, process.env.SECRET_KEY)
+  }
+
+
+  
+
+  res.send({ "token":token, success:true, "iscompany":iscompany, msg: "로그인에 성공 하였습니다."});
 });
 
 

@@ -12,35 +12,35 @@ const companyuserSchema = new mongoose.Schema({
       },
       password: {
         type: String,
-        required: true,
+
       },
     
 
       profileimage: {
         type: String,
-        required:false,
+
       },
 
       image: {
         type:String,
-        required:true,
+
       },
 
       companyname: {
 
         type:String,
-        require:true,
+
       },
     
 
       intro: {
         type:String,
-        required:true
+
       },
 
       address: {
         type:String,
-        required:true
+ 
       }
 
 });
