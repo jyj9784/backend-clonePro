@@ -4,7 +4,7 @@ const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
 const userSchema = new mongoose.Schema({
-  userId: {
+  userid: {
     type: String,
     required: true,
     unique: true,
@@ -13,9 +13,24 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  userImageUrl: {
+
+  username: {
     type: String,
+    required: true,
+  }
+  profileimage: {
+    type: String,
+    required:true,
   },
+
+  position: {
+    type:Number,
+    required:true
+  }
+
+
+
+
 });
 
 module.exports = mongoose.model('User', userSchema);
