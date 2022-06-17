@@ -29,6 +29,16 @@ const companyuserSchema = new mongoose.Schema({
         required:true
       },
 
+      intro: {
+        type:String,
+        required:true
+      },
+
+      address: {
+        type:String,
+        required:true
+      }
+
 });
     
     
