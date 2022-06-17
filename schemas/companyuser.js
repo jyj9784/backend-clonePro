@@ -15,19 +15,23 @@ const companyuserSchema = new mongoose.Schema({
         required: true,
       },
     
-      username: {
-        type: String,
-        required: true,
-      }
+
       profileimage: {
         type: String,
+        required:false,
+      },
+
+      image: {
+        type:String,
         required:true,
       },
-    
-      position: {
-        type:Number,
-        required:true
+
+      companyname: {
+
+        type:String,
+        require:true,
       },
+    
 
       intro: {
         type:String,

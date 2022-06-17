@@ -13,8 +13,8 @@ dotenv.config();
 
 //회원가입 양식
 const postUsersSchema = Joi.object({
-  userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,10}$')).required(),
-  password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,20}$'))
+  userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required(),
+  password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$'))
   .required(),
   confirmPassword: Joi.string().required(),
   profileimage: Joi.string(),
@@ -23,7 +23,7 @@ const postUsersSchema = Joi.object({
 //회원가입 - 개인
 router.post('/api/user/signup', async (req, res) => {
   try {
-    const { userid, password, confirmPassword username, profileimage, position } =
+    const { userid, password, confirmPassword ,username, profileimage, position } =
       await postUsersSchema.validateAsync(req.body);
     // console.log({ userid, password, confirmPassword, profileimage });
 
@@ -119,20 +119,17 @@ router.post('/user/login', async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-// 정보 조회
-router.get('/checkLogin', authMiddleware, async (req, res) => {
+// 유저 조회 (편의용)
+router.get('/userlist', authMiddleware, async (req, res) => {
   const { user } = res.locals;
+
+
+  const user_list = await User.find()
+
   res.send({
     success: '정보 조회가 성공하였습니다.',
-    userid: user[0].userid,
-    profileimage: user[0].profileimage,
+    
+    user_list
   });
 });
 
