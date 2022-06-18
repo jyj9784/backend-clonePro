@@ -108,6 +108,16 @@ router.post('/user/company/signup', async (req, res) => {
       });
     }
 
+    const exitstUsers2 = await CompanyUser.find({ userid });
+    if (exitstUsers2.length) {
+      return res.status(400).send({
+        errorMessage: '중복된 아이디가 존재합니다.',
+      });
+    }
+
+
+
+
     const salt = await Bcrypt.genSalt(Number(process.env.SaltKEY));
     const hashPassword = await Bcrypt.hash(password, salt);
 
@@ -149,7 +159,7 @@ router.post('/user/login', async (req, res) => {
     iscompnay = false;
   }
 
-  if (cp_user.companyname) {
+  if (cp_user) {
     iscompany = true;
   }
 
