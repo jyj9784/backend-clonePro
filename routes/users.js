@@ -62,18 +62,23 @@ router.post('/user/signup', async (req, res) => {
       });
     }
 
+    const exitstUsers3 = await CompanyUser.find({ userid });
+    if (exitstUsers3.length) {
+      return res.status(400).send({
+        errorMessage: '중복된 아이디가 존재합니다.',
+      });
+    }
+
     const salt = await Bcrypt.genSalt(Number(process.env.SaltKEY));
     const hashPassword = await Bcrypt.hash(password, salt);
 
     const user = new User({ userid, password: hashPassword, profileimage });
     await user.save();
-    res
-      .status(201)
-      .send({
-        success: true,
-        iscompany: false,
-        msg: '회원가입을 성공하였습니다',
-      });
+    res.status(201).send({
+      success: true,
+      iscompany: false,
+      msg: '회원가입을 성공하였습니다',
+    });
   } catch (error) {
     return res.status(400).send(
       console.error(error)
@@ -115,9 +120,6 @@ router.post('/user/company/signup', async (req, res) => {
       });
     }
 
-
-
-
     const salt = await Bcrypt.genSalt(Number(process.env.SaltKEY));
     const hashPassword = await Bcrypt.hash(password, salt);
 
@@ -130,13 +132,11 @@ router.post('/user/company/signup', async (req, res) => {
       address,
     });
     await cp_user.save();
-    res
-      .status(201)
-      .send({
-        success: true,
-        iscompany: true,
-        msg: '회원가입을 성공하였습니다',
-      });
+    res.status(201).send({
+      success: true,
+      iscompany: true,
+      msg: '회원가입을 성공하였습니다',
+    });
   } catch (error) {
     return res.status(400).send(
       console.error(error)
@@ -204,8 +204,7 @@ router.post('/user/login', async (req, res) => {
 });
 
 // 유저 조회 (편의용)
-router.get('/userlist', authMiddleware, async (req, res) => {
-  const { user } = res.locals;
+router.get('/userlist', async (req, res) => {
 
   const user_list = await User.find();
 
