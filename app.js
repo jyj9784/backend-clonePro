@@ -9,8 +9,10 @@ const usersRouter = require('./routes/users');
 const commentsRouter = require('./routes/comments');
 const postsRouter = require('./routes/posts');
 const companyRouter = require('./routes/company');
-const swaggerUi = require('swagger-ui-express');
-const swaggerFile = require('./swagger_output');
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./swagger_output");
+
+
 
 connect();
 
