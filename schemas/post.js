@@ -11,7 +11,6 @@ const PostSchema = new mongoose.Schema({
         userid: {
             type: String,
             required: true,
-            unique: true,
         },
         // 채용정보 썸네일
         thumbnail: {
