@@ -160,7 +160,7 @@ router.post('/user/login', async (req, res) => {
   let iscompany = '';
 
   if (user) {
-    iscompnay = false;
+    iscompany = false;
   }
 
   if (cp_user) {
