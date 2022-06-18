@@ -205,7 +205,6 @@ router.post('/user/login', async (req, res) => {
 
 // 유저 조회 (편의용)
 router.get('/userlist', async (req, res) => {
-
   const user_list = await User.find();
 
   res.send({
