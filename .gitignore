@@ -2,9 +2,7 @@
 
 /node_modules
 
-
-/src/*
 /src
 
-swagger_output.json
-swagger.js
+/LICENSE
+

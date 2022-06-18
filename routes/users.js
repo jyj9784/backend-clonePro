@@ -10,6 +10,7 @@ const jwtSecret = process.env.SECRET_KEY;
 const authMiddleware = require('../middlewares/auth-middleware');
 const Bcrypt = require('bcrypt');
 
+
 // console.log(process.env.SECRET_KEY)
 
 //회원가입 양식
