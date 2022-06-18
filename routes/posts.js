@@ -4,42 +4,21 @@ const router = express.Router();
 const Post = require('../schemas/post');
 const CompanyUser = require('../schemas/companyuser');
 const authMiddlewareCo = require('../middlewares/auth-middleware-co');
+const Joi = require('joi');
 
 
-const postUsersSchema = Joi.object({
-    userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required().email(),
-    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$')).required(),
-    confirmpassword: Joi.string().required(),
-    username: Joi.string().required(),
-    profileimage: Joi.string(),
-    position: Joi.number().required(),
+const postUsersSchema3 = Joi.object({
 
+
+    thumbnail: Joi.string().required(),
+    profileimage: Joi.string().required(),
+    position: Joi.string().required(),
+    subcontent: Joi.string().required(),
+    userimage: Joi.string().required(),
+    title: Joi.string().required(),
 
 
 })
-
-
-// postingid,
-// userid,
-// thumbnail,
-// title,
-// maincontent,
-// subcontent,
-// userimage,
-// position,
-
-
-const postUsersSchema2 = Joi.object({
-    userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required().email(),
-    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$')).required(),
-    confirmpassword: Joi.string().required(),
-    username: Joi.string().required(),
-    profileimage: Joi.string(),
-    position: Joi.number().required(),
-
-})
-
-
 
 
 
@@ -60,8 +39,18 @@ router.post('/posting', authMiddlewareCo, async (req, res) => {
         }
         // 로그인했을 때 userid와 일치하는 회사정보를 찾아 companyinfo 변수에 담음
         const companyinfo = await CompanyUser.findOne({ userid });
-        // console.log(companyinfo)
-        const { thumbnail, title, maincontent, subcontent, userimage, position } = req.body;
+        console.log(companyinfo)
+        // const { thumbnail, title, maincontent, subcontent, userimage, position } = req.body;
+
+
+
+        const {
+            thumbnail, title, maincontent, subcontent, userimage, position
+          } = await postUsersSchema3.validateAsync(req.body);
+          
+        //   console.log({ userid, password, confirmpassword, profileimage });
+
+
         const recruit = await Post.create({
             postingid,
             userid,
