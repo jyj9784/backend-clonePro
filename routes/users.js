@@ -149,7 +149,7 @@ router.post('/user/login', async (req, res) => {
     iscompnay = false;
   }
 
-  if (cp_user) {
+  if (cp_user.companyname) {
     iscompany = true;
   }
 
