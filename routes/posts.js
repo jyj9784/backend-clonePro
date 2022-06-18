@@ -48,7 +48,7 @@ router.put('/posting/:postingid', authMiddlewareCo, async (req, res) => {
         console.log(list)
         if (userid === list.userid) {
             await Post.updateOne({postingid}, {$set: req.body});
-            res.status(200).send({ success: true});
+            res.status(201).send({ success: true});
         } else {
             res.status(403).send("수정 권한이 없습니다.");
         }

@@ -35,7 +35,8 @@ const PostSchema = new mongoose.Schema({
         },
         // 채용정보 이미지
         userimage: {
-            type: String,
+            type: Array,
+            default: [],
             required: true,
         },
         // 채용정보 포지션(프론트엔드(1) or 백엔드(-1))
