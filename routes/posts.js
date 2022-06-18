@@ -21,8 +21,6 @@ const postUsersSchema3 = Joi.object({
 })
 
 
-
-
 // 채용정보 등록(기업회원 로그인 시 가능)
 router.post('/posting', authMiddlewareCo, async (req, res) => {
     try {
