@@ -62,6 +62,13 @@ router.post('/user/signup', async (req, res) => {
       });
     }
 
+    const exitstUsers3 = await CompanyUser.find({ userid });
+    if (exitstUsers3.length) {
+      return res.status(400).send({
+        errorMessage: '중복된 아이디가 존재합니다.',
+      });
+    }
+
     const salt = await Bcrypt.genSalt(Number(process.env.SaltKEY));
     const hashPassword = await Bcrypt.hash(password, salt);
 
