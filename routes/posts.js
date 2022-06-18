@@ -7,18 +7,6 @@ const authMiddlewareCo = require('../middlewares/auth-middleware-co');
 const Joi = require('joi');
 
 
-const postUsersSchema3 = Joi.object({
-
-
-    thumbnail: Joi.string().required(),
-    profileimage: Joi.string().required(),
-    position: Joi.string().required(),
-    subcontent: Joi.string().required(),
-    userimage: Joi.string().required(),
-    title: Joi.string().required(),
-
-
-})
 
 
 
@@ -40,9 +28,7 @@ router.post('/posting', authMiddlewareCo, async (req, res) => {
         // 로그인했을 때 userid와 일치하는 회사정보를 찾아 companyinfo 변수에 담음
         const companyinfo = await CompanyUser.findOne({ userid });
         console.log(companyinfo)
-        // const { thumbnail, title, maincontent, subcontent, userimage, position } = req.body;
-
-
+        const { thumbnail, title, maincontent, subcontent, userimage, position } = req.body;
 
 
           
@@ -59,12 +45,8 @@ router.post('/posting', authMiddlewareCo, async (req, res) => {
             userimage,
             position,
         });
-
-
-
-        // console.log(info);
         // console.log(recruit)
-            res.status(201).send([recruit, company]);
+            res.status(200).send([recruit, companyinfo]);
     } catch (err) {
         res.status(400).send("채용정보 작성 오류")
     }
