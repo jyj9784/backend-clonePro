@@ -27,9 +27,7 @@ const postUsersSchema2 = Joi.object({
   userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required(),
   password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$')).required(),
   confirmpassword: Joi.string().required(),
-  username: Joi.string().required(),
   profileimage: Joi.string(),
-  position: Joi.number().required(),
   address: Joi.string().required(),
   companyname: Joi.string().required(),
   intro: Joi.string().required(),
@@ -96,6 +94,7 @@ router.post('/user/company/signup', async (req, res) => {
       userid,
       password,
       confirmpassword,
+      companyname,
       profileimage,
       intro,
       image,
@@ -122,9 +121,6 @@ router.post('/user/company/signup', async (req, res) => {
       });
     }
 
-
-
-
     const salt = await Bcrypt.genSalt(Number(process.env.SaltKEY));
     const hashPassword = await Bcrypt.hash(password, salt);
 
@@ -132,6 +128,7 @@ router.post('/user/company/signup', async (req, res) => {
       userid,
       password: hashPassword,
       profileimage,
+      companyname,
       intro,
       image,
       address,
