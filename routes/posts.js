@@ -38,6 +38,7 @@ router.post('/posting', authMiddlewareCo, async (req, res) => {
     } catch (err) {
         res.status(400).send("채용정보 작성 오류")
     }
+
 });
 
 // 채용정보 수정(기업회원 로그인 시 가능)
@@ -60,7 +61,7 @@ router.put('/posting/:postingid', authMiddlewareCo, async (req, res) => {
     } catch {
         res.status(400).send("채용정보 수정 오류");
     }
-
+    
 });
 
 // 채용정보 삭제(기업회원 로그인 시 가능)
@@ -81,6 +82,7 @@ router.delete('/posting/:postingid', authMiddlewareCo, async (req, res) => {
     } catch {
         res.status(400).send("채용정보 삭제 오류");
     }
+
 });
 
 // 채용정보 전체조회(로그인 안되도 다 볼 수 있게)
