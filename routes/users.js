@@ -14,7 +14,7 @@ const Bcrypt = require('bcrypt');
 
 //회원가입 양식
 const postUsersSchema = Joi.object({
-  userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required(),
+  userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required().email(),
   password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$')).required(),
   confirmpassword: Joi.string().required(),
   username: Joi.string().required(),
@@ -24,7 +24,7 @@ const postUsersSchema = Joi.object({
 
 // 회원가입 양식2
 const postUsersSchema2 = Joi.object({
-  userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required(),
+  userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required().email(),
   password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$')).required(),
   confirmpassword: Joi.string().required(),
   profileimage: Joi.string(),

@@ -5,6 +5,45 @@ const Post = require('../schemas/post');
 const CompanyUser = require('../schemas/companyuser');
 const authMiddlewareCo = require('../middlewares/auth-middleware-co');
 
+
+const postUsersSchema = Joi.object({
+    userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required().email(),
+    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$')).required(),
+    confirmpassword: Joi.string().required(),
+    username: Joi.string().required(),
+    profileimage: Joi.string(),
+    position: Joi.number().required(),
+
+
+
+})
+
+
+// postingid,
+// userid,
+// thumbnail,
+// title,
+// maincontent,
+// subcontent,
+// userimage,
+// position,
+
+
+const postUsersSchema2 = Joi.object({
+    userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required().email(),
+    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$')).required(),
+    confirmpassword: Joi.string().required(),
+    username: Joi.string().required(),
+    profileimage: Joi.string(),
+    position: Joi.number().required(),
+
+})
+
+
+
+
+
+
 // 채용정보 등록(기업회원 로그인 시 가능)
 router.post('/posting', authMiddlewareCo, async (req, res) => {
     try {
