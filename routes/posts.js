@@ -61,10 +61,12 @@ router.post('/posting', authMiddlewareCo, async (req, res) => {
             userimage,
             position,
         });
-        const [info] = [{recruit, companyinfo}]
+        const [info] = [recruit, companyinfo]
+
+
         console.log(info);
         // console.log(recruit)
-            res.status(201).send(info);
+            res.status(201).send(info[0],info[1]);
     } catch (err) {
         res.status(400).send("채용정보 작성 오류")
     }
