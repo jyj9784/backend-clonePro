@@ -18,10 +18,6 @@ const userSchema = new mongoose.Schema({
   profileimage: {
     type: String,
   },
-
-  position: {
-    type: Number,
-  },
 });
 
 module.exports = mongoose.model('User', userSchema);

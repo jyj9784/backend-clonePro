@@ -38,6 +38,24 @@ router.post('/posting', authMiddlewareCo, async (req, res) => {
     } catch (err) {
         res.status(400).send("채용정보 작성 오류")
     }
+    // 로그인했을 때 userid와 일치하는 회사정보를 찾아 companyinfo 변수에 담음
+    const companyinfo = await CompanyUser.findOne({ userid });
+    const { thumbnail, title, maincontent, subcontent, userimage, position } =
+      req.body;
+    const recruit = await Post.create({
+      postingid,
+      userid,
+      thumbnail,
+      title,
+      maincontent,
+      subcontent,
+      userimage,
+      position,
+    });
+    res.status(201).send([recruit, companyinfo]);
+  } catch (err) {
+    res.status(400).send('error');
+  }
 });
 
 // 채용정보 수정(기업회원 로그인 시 가능)
@@ -60,7 +78,9 @@ router.put('/posting/:postingid', authMiddlewareCo, async (req, res) => {
     } catch {
         res.status(400).send("채용정보 수정 오류");
     }
-
+  } catch {
+    res.status(400).send('error');
+  }
 });
 
 // 채용정보 삭제(기업회원 로그인 시 가능)
@@ -81,6 +101,9 @@ router.delete('/posting/:postingid', authMiddlewareCo, async (req, res) => {
     } catch {
         res.status(400).send("채용정보 삭제 오류");
     }
+  } catch {
+    res.status(400).send('error');
+  }
 });
 
 // 채용정보 전체조회(로그인 안되도 다 볼 수 있게)
