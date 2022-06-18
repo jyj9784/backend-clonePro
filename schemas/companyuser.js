@@ -3,25 +3,35 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const jwt = require('jsonwebtoken');
 
-const userSchema = new mongoose.Schema({
+const companyuserSchema = new mongoose.Schema({
   userid: {
     type: String,
+    required: true,
     unique: true,
   },
   password: {
     type: String,
   },
 
-  username: {
-    type: String,
-  },
   profileimage: {
     type: String,
   },
 
-  position: {
-    type: Number,
+  image: {
+    type: String,
+  },
+
+  companyname: {
+    type: String,
+  },
+
+  intro: {
+    type: String,
+  },
+
+  address: {
+    type: String,
   },
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Companyuser', companyuserSchema);
