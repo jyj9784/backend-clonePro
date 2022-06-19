@@ -4,45 +4,7 @@ const router = express.Router();
 const Post = require('../schemas/post');
 const CompanyUser = require('../schemas/companyuser');
 const authMiddlewareCo = require('../middlewares/auth-middleware-co');
-
-
-const postUsersSchema = Joi.object({
-    userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required().email(),
-    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$')).required(),
-    confirmpassword: Joi.string().required(),
-    username: Joi.string().required(),
-    profileimage: Joi.string(),
-    position: Joi.number().required(),
-
-
-
-})
-
-
-// postingid,
-// userid,
-// thumbnail,
-// title,
-// maincontent,
-// subcontent,
-// userimage,
-// position,
-
-
-const postUsersSchema2 = Joi.object({
-    userid: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{2,8}$')).required().email(),
-    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$')).required(),
-    confirmpassword: Joi.string().required(),
-    username: Joi.string().required(),
-    profileimage: Joi.string(),
-    position: Joi.number().required(),
-
-})
-
-
-
-
-
+const Joi = require('joi');
 
 // 채용정보 등록(기업회원 로그인 시 가능)
 router.post('/posting', authMiddlewareCo, async (req, res) => {
@@ -51,6 +13,11 @@ router.post('/posting', authMiddlewareCo, async (req, res) => {
         const {user} = res.locals;
         // console.log(user)
         const userid = user[0].userid;
+        const companyname = user[0].companyname;
+        const profileimage = user[0].profileimage;
+        const intro = user[0].intro;
+        const address = user[0].address;
+
         // console.log(userid)
         // postingid 자동으로 생성되게 설정
         const maxpostingid = await Post.findOne().sort('-postingid');
@@ -59,12 +26,17 @@ router.post('/posting', authMiddlewareCo, async (req, res) => {
             postingid = maxpostingid.postingid+1;
         }
         // 로그인했을 때 userid와 일치하는 회사정보를 찾아 companyinfo 변수에 담음
-        const companyinfo = await CompanyUser.findOne({ userid });
+        // const companyinfo = await CompanyUser.findOne({ userid }, { companyname: 1, profileimage: 1, intro: 1, image: 1, address: 1 });
         // console.log(companyinfo)
         const { thumbnail, title, maincontent, subcontent, userimage, position } = req.body;
+
         const recruit = await Post.create({
             postingid,
             userid,
+            companyname,
+            profileimage,
+            intro,
+            address,
             thumbnail,
             title,
             maincontent,
@@ -73,7 +45,10 @@ router.post('/posting', authMiddlewareCo, async (req, res) => {
             position,
         });
         // console.log(recruit)
-            res.status(201).send([recruit, companyinfo]);
+            res.status(200).send({
+                success: true,
+                msg: "등록이 완료되었습니다."
+                });
     } catch (err) {
         res.status(400).send("채용정보 작성 오류")
     }
@@ -128,7 +103,8 @@ router.delete('/posting/:postingid', authMiddlewareCo, async (req, res) => {
 router.get('/posting', async (req, res) => {
     try {
         const posts = await Post.find({}).sort({ postingid: -1});
-        res.send(posts);
+        const companyinfo = await CompanyUser.find({}, { companyname: 1, profileimage: 1, intro: 1, image: 1, address: 1 });
+        res.send(["posts", posts, "companyinfo", companyinfo]);
     } catch(err) {
         res.status(400).send("채용정보 조회 오류");
     }
