@@ -1,8 +1,13 @@
+const dotenv = require('dotenv'); // 설정파일
+dotenv.config();
 const express = require('express');
+const app = express();
 const connect = require('./schemas/');
+const pageRouter = require('./routes/page');
+// const {sequelize} = require('./models');
+const nodemailer = require('nodemailer');
 const cors = require('cors');
 const morgan = require('morgan');
-const app = express();
 const port = 3000;
 const router = express.Router();
 const usersRouter = require('./routes/users');
@@ -22,6 +27,7 @@ const io = new Server(server);
 
 connect();
 
+
 const moment = require("moment");
 require("moment-timezone");
 moment.tz.setDefault("Asia/seoul")
@@ -29,14 +35,18 @@ const createdAt = moment().format("HH:mm");
 console.log("현재 시각은 "+createdAt + " 입니다.")
 
 
-app.use(morgan('tiny'));
+app.use(morgan('dev'));
+
 app.use(cors());
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(express.static('static'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use('/', [usersRouter, commentsRouter, postsRouter, companyRouter]);
-// app.use('/chat', socketRouter);
+
+
+
+app.use('/api', [usersRouter, commentsRouter, postsRouter, companyRouter, socketRouter]);
+
 
 // app.get('/', (req, res) => {
 //   res.send('헬로 월드');
@@ -71,3 +81,8 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
   console.log(port, '포트가 켜졌습니다.');
 });
+
+
+
+
+
