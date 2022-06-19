@@ -103,8 +103,13 @@ router.delete('/posting/:postingid', authMiddlewareCo, async (req, res) => {
 router.get('/posting', async (req, res) => {
     try {
         const posts = await Post.find({}).sort({ postingid: -1});
+        console.log(posts)
         const companyinfo = await CompanyUser.find({}, { companyname: 1, profileimage: 1, intro: 1, image: 1, address: 1 });
-        res.send(["posts", posts, "companyinfo", companyinfo]);
+        console.log(companyinfo)
+        const info = {};
+        info.posts = posts;
+        info.companyinfo = companyinfo;
+        res.send(info);
     } catch(err) {
         res.status(400).send("채용정보 조회 오류");
     }
