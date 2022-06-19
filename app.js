@@ -36,7 +36,6 @@ console.log("현재 시각은 "+createdAt + " 입니다.")
 
 
 app.use(morgan('dev'));
-
 app.use(cors());
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(express.static('static'));
@@ -45,12 +44,12 @@ app.use(express.urlencoded({ extended: false }));
 
 
 
-app.use('/api', [usersRouter, commentsRouter, postsRouter, companyRouter, socketRouter]);
+app.use('/api', [usersRouter, commentsRouter, postsRouter, companyRouter]);
 
 
-// app.get('/', (req, res) => {
-//   res.send('헬로 월드');
-// });
+app.get('/', (req, res) => {
+  res.send('헬로 월드');
+});
 
 app.get('/chat', (req, res) => {
   res.sendFile(__dirname + '/chat.html');
