@@ -7,16 +7,20 @@ const User = require('../models/user');
 const router = express.Router();
 
 router.post('/join', isNotLoggedIn, async (req, res, next) => {
-  const { email, nick, password } = req.body;
+  const {
+    userid,
+    password,
+    username,
+  } = req.body;
   try {
-    const exUser = await User.findOne({ where: { email } });
+    const exUser = await User.findOne({ where: { userid } });
     if (exUser) {
       return res.redirect('/join?error=exist');
     }
     const hash = await bcrypt.hash(password, 12);
     await User.create({
-      email,
-      nick,
+      userid,
+      username,
       password: hash,
     });
     return res.redirect('/');
@@ -53,10 +57,14 @@ router.get('/logout', isLoggedIn, (req, res) => {
 
 router.get('/kakao', passport.authenticate('kakao'));
 
-router.get('/kakao/callback', passport.authenticate('kakao', {
-  failureRedirect: '/',
-}), (req, res) => {
-  res.redirect('/');
-});
+router.get(
+  '/kakao/callback',
+  passport.authenticate('kakao', {
+    failureRedirect: '/',
+  }),
+  (req, res) => {
+    res.redirect('/');
+  }
+);
 
 module.exports = router;
