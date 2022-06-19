@@ -27,6 +27,9 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(express.static('static'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+
+
 app.use('/api', [usersRouter, commentsRouter, postsRouter, companyRouter, socketRouter]);
 
 app.get('/', (req, res) => {
