@@ -3,10 +3,9 @@ dotenv.config();
 const express = require('express');
 const app = express();
 const connect = require('./schemas/');
-const passport = require('passport');
 const pageRouter = require('./routes/page');
-const {sequelize} = require('./models');
-const passportConfig = require('./passport'); //Passport 설정 import
+// const {sequelize} = require('./models');
+const nodemailer = require('nodemailer');
 const cors = require('cors');
 const morgan = require('morgan');
 const port = 3000;
@@ -17,8 +16,6 @@ const postsRouter = require('./routes/posts');
 const companyRouter = require('./routes/company');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger_output');
-const authRouter = require('./routes/auth')
-
 
 
 
@@ -33,22 +30,9 @@ app.use(express.urlencoded({ extended: false }));
 
 
 
-passportConfig(); //호출
-app.set('port',process.env.PORT || 8001);
-app.set('view engine','html');
+app.use('/api', [usersRouter, commentsRouter, postsRouter, companyRouter, pageRouter]);
 
-app.use(session({
-  resave:false,
-  saveUninitialized:false,
-  secret: process.env.COOKIE_SECRET,
-  cookie: {
-    httpOnly: true,
-    secure: false,
-  },
-}))
 
-app.use('/api', [usersRouter, commentsRouter, postsRouter, companyRouter, pageRouter, authRouter]);
-passportConfig();
 app.get('/', (req, res) => {
   res.send('헬로 월드');
 });
