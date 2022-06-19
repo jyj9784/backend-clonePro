@@ -33,7 +33,7 @@
 <script>
     const socket = io();
 
-    const username = "<유저네임 들어갈 자리>";
+    const username = prompt("닉네임을 입력해주세요");
     socket.emit('new user', username);
 
     const messageForm = document.getElementById('form');
