@@ -13,6 +13,23 @@ const PostSchema = new mongoose.Schema({
         match: /.+\@.+\..+/,
      
     },
+    profileimage: {
+        type: String,
+        
+      },
+    
+    companyname: {
+        type: String,
+      },
+    
+    intro: {
+        type: String,
+      },
+    
+    address: {
+        type: String,
+      },
+
     // 채용정보 썸네일
     thumbnail: {
         type: String,
@@ -39,8 +56,6 @@ const PostSchema = new mongoose.Schema({
     // 채용정보 이미지
     userimage: {
         type: Array,
-        default: [],
-
     },
     // 채용정보 포지션(프론트엔드(1) or 백엔드(-1))
     position: {
