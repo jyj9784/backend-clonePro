@@ -11,6 +11,7 @@ const authMiddleware = require('../middlewares/auth-middleware');
 const Bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 
+
 // console.log(process.env.SECRET_KEY)
 
 //회원가입 양식
