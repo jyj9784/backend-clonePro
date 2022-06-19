@@ -152,7 +152,7 @@ router.post('/user/company/signup', async (req, res) => {
 
     const salt = await Bcrypt.genSalt(Number(process.env.SaltKEY));
     const hashPassword = await Bcrypt.hash(password, salt);
-
+  
     const cp_user = new CompanyUser({
       userid,
       password: hashPassword,
