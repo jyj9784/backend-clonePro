@@ -3,16 +3,17 @@ dotenv.config();
 const express = require('express');
 const app = express();
 const connect = require('./schemas/');
-const pageRouter = require('./routes/page');
 // const {sequelize} = require('./models');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const morgan = require('morgan');
+const session = require("express-session");
 const port = 3000;
 const router = express.Router();
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/users3');
 const postsRouter = require('./routes/posts');
 const companyRouter = require('./routes/company');
+const authRouter = require('./routes/auth');
 // const socketRouter = require('./socket');
 const { Server } = require('socket.io');
 const swaggerUi = require('swagger-ui-express');
@@ -40,10 +41,17 @@ app.use(express.static('static'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+//session 설정
+app.use(session({
+  secret: 'practice',
+  secure: false,
+  resave: true,
+  saveUninitialized: true,
+}));
 
 
 app.use('/api', [usersRouter, postsRouter, companyRouter]);
-
+app.use("/auth", authRouter);
 
 app.get('/', (req, res) => {
   res.send('헬로 월드');
