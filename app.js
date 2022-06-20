@@ -46,7 +46,9 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', socket=>{
+  console.log("새로운 소켓이 연결됐어요!");
   socket.on('message',({name,message}) => {
+    console.log({name,message});
       io.emit('message',({name, message}))
   })
 })
