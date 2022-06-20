@@ -7,7 +7,7 @@ const authMiddlewareCo = require('../middlewares/auth-middleware-co');
 const Joi = require('joi');
 
 // 채용정보 등록(기업회원 로그인 시 가능)
-router.post('/posting', authMiddlewareCo, async (req, res) => {
+router.post('/postings', authMiddlewareCo, async (req, res) => {
     try {
         // 로그인했을 때 userid
         const {user} = res.locals;
@@ -56,7 +56,7 @@ router.post('/posting', authMiddlewareCo, async (req, res) => {
 });
 
 // 채용정보 수정(기업회원 로그인 시 가능)
-router.put('/posting/:postingid', authMiddlewareCo, async (req, res) => {
+router.put('/postings/:postingid', authMiddlewareCo, async (req, res) => {
     try {
         const { postingid } = req.params;
         // console.log(postingid)
@@ -79,7 +79,7 @@ router.put('/posting/:postingid', authMiddlewareCo, async (req, res) => {
 });
 
 // 채용정보 삭제(기업회원 로그인 시 가능)
-router.delete('/posting/:postingid', authMiddlewareCo, async (req, res) => {
+router.delete('/postings/:postingid', authMiddlewareCo, async (req, res) => {
     try {
         const { postingid } = req.params;
         const { user } = res.locals;
@@ -100,7 +100,7 @@ router.delete('/posting/:postingid', authMiddlewareCo, async (req, res) => {
 });
 
 // 채용정보 전체조회(로그인 안되도 다 볼 수 있게)
-router.get('/posting', async (req, res) => {
+router.get('/postings', async (req, res) => {
     try {
         const posts = await Post.find({}).sort({ postingid: -1});
         console.log(posts)

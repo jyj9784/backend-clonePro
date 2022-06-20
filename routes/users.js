@@ -37,7 +37,7 @@ const postUsersSchema2 = Joi.object({
 });
 
 //회원가입 - 개인
-router.post('/user/signup', async (req, res) => {
+router.post('/users/signup', async (req, res) => {
   try {
     const {
       userid,
@@ -118,7 +118,7 @@ router.post('/user/signup', async (req, res) => {
 });
 
 //회원가입 - 기업
-router.post('/user/company/signup', async (req, res) => {
+router.post('/users/companies/signup', async (req, res) => {
   try {
     const {
       userid,
@@ -207,7 +207,7 @@ router.post('/user/company/signup', async (req, res) => {
 });
 
 //로그인
-router.post('/user/login', async (req, res) => {
+router.post('/users/login', async (req, res) => {
   const { userid, password } = req.body;
   const user = await User.findOne({ userid });
   const cp_user = await CompanyUser.findOne({ userid });
@@ -265,7 +265,7 @@ router.post('/user/login', async (req, res) => {
 });
 
 // 유저 조회 (편의용)
-router.get('/userlist', async (req, res) => {
+router.get('/userlists', async (req, res) => {
   const user_list = await User.find();
 
   res.send({

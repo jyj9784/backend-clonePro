@@ -11,12 +11,10 @@ const morgan = require('morgan');
 const port = 3000;
 const router = express.Router();
 const usersRouter = require('./routes/users');
-const commentsRouter = require('./routes/comments');
 const postsRouter = require('./routes/posts');
 const companyRouter = require('./routes/company');
 // const socketRouter = require('./socket');
 const { Server } = require('socket.io');
-
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger_output');
 const http = require('http');
@@ -44,7 +42,7 @@ app.use(express.urlencoded({ extended: false }));
 
 
 
-app.use('/api', [usersRouter, commentsRouter, postsRouter, companyRouter]);
+app.use('/api', [usersRouter, postsRouter, companyRouter]);
 
 
 app.get('/', (req, res) => {
