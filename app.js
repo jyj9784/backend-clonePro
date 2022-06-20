@@ -19,7 +19,8 @@ const swaggerFile = require('./swagger_output');
 const http = require('http');
 const server = http.createServer(app);
 const io = new Server(server);
-import session from "express-session";
+const passport = require('passport');
+
 
 
 // 출처: https://dydals5678.tistory.com/130 [아빠개발자의 노트:티스토리]
@@ -42,12 +43,12 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(express.static('static'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(session({
-  secret: "ajhdfjdanfadf",
-  resave: true,
-  saveUninitialized : false
-})
-);
+// app.use(session({
+//   secret: "ajhdfjdanfadf",
+//   resave: true,
+//   saveUninitialized : false
+// })
+// );
 
 app.use('/api', [usersRouter, postsRouter, companyRouter]);
 
