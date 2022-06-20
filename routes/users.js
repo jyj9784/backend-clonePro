@@ -269,7 +269,6 @@ router.post('/users/login', async (req, res) => {
     token: token,
     success: true,
     iscompany: iscompany,
-    username: username,
     msg: '로그인에 성공 하였습니다.',
   });
 });
