@@ -75,7 +75,7 @@ router.post('/users/signup', async (req, res) => {
     const salt = await Bcrypt.genSalt(Number(process.env.SaltKEY));
     const hashPassword = await Bcrypt.hash(password, salt);
 
-    const user = new User({ userid, password: hashPassword, profileimage });
+    const user = new User({ userid, password: hashPassword, profileimage, username, position });
     await user.save();
     
     // 메일발송 객체(원래 구글로 하려했으나 네이버로 변경)
@@ -269,6 +269,7 @@ router.post('/users/login', async (req, res) => {
     token: token,
     success: true,
     iscompany: iscompany,
+    username: username,
     msg: '로그인에 성공 하였습니다.',
   });
 });
@@ -283,5 +284,20 @@ router.get('/userlists', async (req, res) => {
     user_list,
   });
 });
+
+// router.get('/profile', authMiddleware, async (req, res)=>{
+//   try {
+//     const {user} = res.locals;
+//     console.log(user)
+//     const userid = user[0].userid;
+//     console.log(userid)
+//     res.json( userid );
+//   } catch (err) {
+//     console.log(err);
+//     res.status(400).send({
+//       errorMessage: '요청한 데이터 형식이 올바르지 않습니다.',
+//     });
+//   }
+// });
 
 module.exports = router;
