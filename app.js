@@ -7,7 +7,6 @@ const port = 3000;
 const router = express.Router();
 const usersRouter = require('./routes/users');
 const commentsRouter = require('./routes/comments');
-const postsRouter = require('./routes/posts');
 const companyRouter = require('./routes/company');
 // const SocketIO = require('./socket');
 // const { Server } = require('socket.io');
@@ -38,7 +37,7 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(express.static('static'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use('/', [usersRouter, commentsRouter, postsRouter, companyRouter]);
+app.use('/', [usersRouter, commentsRouter, companyRouter]);
 // app.use('/chat', socketRouter);
 
 app.get('/', (req, res) => {
