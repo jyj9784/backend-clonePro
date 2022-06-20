@@ -62,32 +62,37 @@ app.post('/login',
     function(req,res) {
         res.redirect('/users/'+req.user.username);
     });
-// 출처: https://dydals5678.tistory.com/130 [아빠개발자의 노트:티스토리]
 
-app.get('/chat', (req, res) => {
-  res.sendFile(__dirname + '/chat.html');
-});
-io.on('connection', (socket) => {
-  socket.on('disconnect', () => {
-    io.emit('send message', {
-      message: `${socket.username} 님께서 채팅창을 떠났습니다. ${createdAt}`,
-      user: '환영합니다',
-    });
-  });
+// app.get('/chat', (req, res) => {
+//   res.sendFile(__dirname + '/chat.html');
+// });
+// io.on('connection', (socket) => {
+//   socket.on('disconnect', () => {
+//     io.emit('send message', {
+//       message: `${socket.username} 님께서 채팅창을 떠났습니다. ${createdAt}`,
+//       user: '환영합니다',
+//     });
+//   });
 
-  socket.on('new message', (msg) => {
-    console.log(msg);
-    io.emit('send message', { message: msg, user: socket.username });
-  });
+//   socket.on('new message', (msg) => {
+//     console.log(msg);
+//     io.emit('send message', { message: msg, user: socket.username });
+//   });
 
-  socket.on('new user', (usr) => {
-    socket.username = usr;
-    io.emit('send message', {
-      message: `${socket.username} 님이 채팅에 참여하셨습니다.`,
-      user: '(',
-    });
-  });
-});
+//   socket.on('new user', (usr) => {
+//     socket.username = usr;
+//     io.emit('send message', {
+//       message: `${socket.username} 님이 채팅에 참여하셨습니다.`,
+//       user: '(',
+//     });
+//   });
+// });
+
+// io.on('connection', socket=>{
+//     socket.on('message',({name,message}) => {
+//         io.emit('message',({name, message}))
+//     })
+// })
 
 
 server.listen(port, () => {
