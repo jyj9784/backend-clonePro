@@ -19,6 +19,11 @@ const swaggerFile = require('./swagger_output');
 const http = require('http');
 const server = http.createServer(app);
 const io = new Server(server);
+const passport = require('passport');
+
+
+
+// 출처: https://dydals5678.tistory.com/130 [아빠개발자의 노트:티스토리]
 
 
 
@@ -38,8 +43,12 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(express.static('static'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-
+// app.use(session({
+//   secret: "ajhdfjdanfadf",
+//   resave: true,
+//   saveUninitialized : false
+// })
+// );
 
 app.use('/api', [usersRouter, postsRouter, companyRouter]);
 
@@ -47,6 +56,13 @@ app.use('/api', [usersRouter, postsRouter, companyRouter]);
 app.get('/', (req, res) => {
   res.send('헬로 월드');
 });
+
+app.post('/login',
+    passport.authenticate('local'),
+    function(req,res) {
+        res.redirect('/users/'+req.user.username);
+    });
+// 출처: https://dydals5678.tistory.com/130 [아빠개발자의 노트:티스토리]
 
 app.get('/chat', (req, res) => {
   res.sendFile(__dirname + '/chat.html');
