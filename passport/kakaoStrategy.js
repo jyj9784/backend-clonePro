@@ -1,7 +1,7 @@
 const passport = require('passport');
 const KakaoStrategy = require('passport-kakao').Strategy;
  
-const User = require('../schemas/users');
+const User = require('../schemas/user');
  
 module.exports = () => {
    passport.use(
@@ -41,4 +41,5 @@ module.exports = () => {
          },
       ),
    );
+
 };

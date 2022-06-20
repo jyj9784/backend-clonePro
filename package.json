@@ -37,6 +37,7 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.7.5",
     "passport": "^0.6.0",
+    "passport-kakao": "^1.0.1",
     "socket.io": "^4.5.1",
     "swagger-autogen": "^2.21.3",
     "swagger-ui-express": "^4.4.0"
