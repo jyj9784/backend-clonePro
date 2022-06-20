@@ -19,7 +19,7 @@ const companyuserSchema = new mongoose.Schema({
   },
 
   image: {
-    type: String,
+    type: Array,
   },
 
   companyname: {
