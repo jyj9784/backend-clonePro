@@ -21,7 +21,7 @@ const postUsersSchema = Joi.object({
   confirmpassword: Joi.string().required(),
   username: Joi.string().required(),
   profileimage: Joi.string(),
-  position: Joi.number().required(),
+  position: Joi.string().required(),
 });
 
 // 회원가입 양식2
@@ -33,7 +33,7 @@ const postUsersSchema2 = Joi.object({
   address: Joi.string().required(),
   companyname: Joi.string().required(),
   intro: Joi.string().required(),
-  image: Joi.string().required(),
+  image: Joi.array().required(),
   country: Joi.string().required(),
   region: Joi.string().required(),
   industry: Joi.string().required(),
