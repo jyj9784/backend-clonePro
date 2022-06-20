@@ -34,6 +34,9 @@ const postUsersSchema2 = Joi.object({
   companyname: Joi.string().required(),
   intro: Joi.string().required(),
   image: Joi.string().required(),
+  country: Joi.string().required(),
+  region: Joi.string().required(),
+  industry: Joi.string().required(),
 });
 
 //회원가입 - 개인
@@ -129,6 +132,9 @@ router.post('/users/companies/signup', async (req, res) => {
       intro,
       image,
       address,
+      country,
+      region,
+      industry,
     } = await postUsersSchema2.validateAsync(req.body);
 
     if (password !== confirmpassword) {
@@ -162,6 +168,9 @@ router.post('/users/companies/signup', async (req, res) => {
       intro,
       image,
       address,
+      country,
+      region,
+      industry,
     });
     await cp_user.save();
 
