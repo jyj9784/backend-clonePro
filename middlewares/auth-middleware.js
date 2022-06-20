@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
   const [tokenType, tokenValue] = authorization.split(' ');
   // console.log(tokenType, tokenValue);
 
-  if (tokenType !== 'BEARER') {
+  if (tokenType !== 'Bearer') {
     return res.status(401).send({
       errorMessage: '로그인 후 사용하세요.',
     });
