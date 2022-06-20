@@ -32,7 +32,7 @@
     "application/json"
   ],
   "paths": {
-    "/company": {
+    "/companies": {
       "get": {
         "description": "",
         "parameters": [],
@@ -46,7 +46,28 @@
         }
       }
     },
-    "/posting": {
+    "/profile": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/join": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/postings": {
       "post": {
         "description": "",
         "parameters": [
@@ -84,8 +105,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created"
+          "200": {
+            "description": "OK"
           },
           "400": {
             "description": "Bad Request"
@@ -108,7 +129,7 @@
         }
       }
     },
-    "/posting/{postingid}": {
+    "/postings/{postingid}": {
       "put": {
         "description": "",
         "parameters": [
@@ -152,8 +173,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Created"
           },
           "400": {
             "description": "Bad Request"
@@ -197,11 +218,10 @@
         }
       }
     },
-    "/user/signup": {
+    "/users/signup": {
       "post": {
         "description": "",
         "parameters": [
-
           {
             "name": "body",
             "in": "body",
@@ -209,24 +229,11 @@
               "type": "object",
               "properties": {
                 "userid": {
-                  "example": "abc123"
-                },
-                "password": {
-                  "example": "1234"
-                },
-                "username": {
                   "example": "any"
-                },
-                "profileimage": {
-                  "example": "any"
-                },
-                "position": {
-                  "example": 1
                 }
               }
             }
           }
-
         ],
         "responses": {
           "201": {
@@ -238,11 +245,10 @@
         }
       }
     },
-    "/user/company/signup": {
+    "/users/companies/signup": {
       "post": {
         "description": "",
         "parameters": [
-
           {
             "name": "body",
             "in": "body",
@@ -250,38 +256,11 @@
               "type": "object",
               "properties": {
                 "userid": {
-                  "example": "abc123"
-                },
-                "password": {
-                  "example": "1234"
-                },
-                "username": {
                   "example": "any"
-                },
-                "profileimage": {
-                  "example": "any"
-                },
-                "position": {
-                  "example": 1
-                },
-                "companyname": {
-                  "example": "any"
-                },
-              
-                "intro": {
-                  "example": "any"
-                },
-              
-                "address": {
-                  "example": "any"
-                }
-      
                 }
               }
             }
-          
-        
-
+          }
         ],
         "responses": {
           "201": {
@@ -293,7 +272,7 @@
         }
       }
     },
-    "/user/login": {
+    "/users/login": {
       "post": {
         "description": "",
         "parameters": [
@@ -323,22 +302,13 @@
         }
       }
     },
-    "/userlist": {
+    "/userlists": {
       "get": {
         "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         }
       }

@@ -3,7 +3,6 @@ dotenv.config();
 const express = require('express');
 const app = express();
 const connect = require('./schemas/');
-// const {sequelize} = require('./models');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -13,17 +12,16 @@ const router = express.Router();
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
 const companyRouter = require('./routes/company');
-const authRouter = require('./routes/auth');
 const passport = require("passport");
-const passportConfig = require("./passport");
-// const socketRouter = require('./socket');
 const { Server } = require('socket.io');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger_output');
 const http = require('http');
 const server = http.createServer(app);
 const io = new Server(server);
-
+const mainRouter = require('./routes/main')
+const authRouter = require('./routes/auth')
+const cookieParser = require('cookie-parser');
 
 
 connect();
@@ -43,17 +41,24 @@ app.use(express.static('static'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//session 설정
-app.use(session({
-  secret: 'practice',
-  secure: false,
-  resave: true,
-  saveUninitialized: true,
-}));
 
 
+//----------------------------------------------------------------
+app.set('view engine', 'ejs');
+app.use(session({secret:'MySecret', resave: false, saveUninitialized:true}));
+
+// Passport setting
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Routes
+app.use('/', require('./routes/main'));
+app.use('/auth', require('./routes/auth'));
+
+
+// ----------------------------------------------------------------
 app.use('/api', [usersRouter, postsRouter, companyRouter]);
-app.use("/auth", authRouter);
+app.use('/', [mainRouter,authRouter])
 
 app.get('/', (req, res) => {
   res.send('헬로 월드');
@@ -62,6 +67,25 @@ app.get('/', (req, res) => {
 app.get('/chat', (req, res) => {
   res.sendFile(__dirname + '/chat.html');
 });
+
+
+
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
+
+
+
+
+
+
+
+
+
+
+
+// ------------
 io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     io.emit('send message', {
