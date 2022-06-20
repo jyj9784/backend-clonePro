@@ -3,7 +3,6 @@ dotenv.config();
 const express = require('express');
 const app = express();
 const connect = require('./schemas/');
-const pageRouter = require('./routes/page');
 // const {sequelize} = require('./models');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
