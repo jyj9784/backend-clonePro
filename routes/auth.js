@@ -15,7 +15,9 @@ router.get('/logout', function (req, res) {
 });
 
 // 구글로 로그인하기 Router
-router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+router.get('/google', passport.authenticate('google', { scope: ['profile'] }),function (req, res) { 
+  
+  res.header("Access-Control-Allow-Origin", "*")});
 
 
 
