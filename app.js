@@ -2,9 +2,7 @@ const dotenv = require('dotenv'); // 설정파일
 dotenv.config();
 const express = require('express');
 const app = express();
-const connect = require('./schemas/');
-const Msg = require('./schemas/messages');
-
+const connect = require('./schemas/db');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -21,8 +19,8 @@ const swaggerFile = require('./swagger_output');
 const http = require('http');
 const server = http.createServer(app);
 
-const mainRouter = require('./routes/main')
-const authRouter = require('./routes/auth')
+const mainRouter = require('./routes/main');
+const G_authRouter = require('./routes/google_auth');
 const cookieParser = require('cookie-parser');
 
 connect();
@@ -51,12 +49,9 @@ app.use(passport.session());
 
 // Routes
 app.use('/', require('./routes/main'));
-app.use('/auth', require('./routes/auth'));
-
-// ----------------------------------------------------------------
+app.use('/auth', require('./routes/google_auth'));
 app.use('/api', [usersRouter, postsRouter, companyRouter]);
-app.use('/auth', [mainRouter, authRouter]);
-
+app.use('/auth', [mainRouter, G_authRouter]);
 app.get('/', (req, res) => {
   res.send('헬로 월드');
 });
@@ -70,6 +65,8 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+
+
 
 
 const io = new Server(server, {
@@ -95,9 +92,6 @@ chatspace.on("connection", (socket) => {
     console.log(data)
   });
     
-    // console.log(message)
-    // console.log(‘Message received on server: ’, payload)
-    
         
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);
@@ -106,6 +100,4 @@ chatspace.on("connection", (socket) => {
 });
 server.listen(port, () => {
   console.log(port, '포트가 켜졌습니다.');
-
 });
-
