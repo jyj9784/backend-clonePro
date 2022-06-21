@@ -43,6 +43,7 @@ const postUsersSchema2 = Joi.object({
 router.post('/users/signup', async (req, res) => {
   try {
     const {
+     
       userid,
       password,
       confirmpassword,
@@ -300,3 +301,4 @@ router.get('/userlists', async (req, res) => {
 // });
 
 module.exports = router;
+

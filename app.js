@@ -3,27 +3,27 @@ dotenv.config();
 const express = require('express');
 const app = express();
 const connect = require('./schemas/');
-// const {sequelize} = require('./models');
+
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const morgan = require('morgan');
+const session = require("express-session");
 const port = 3000;
 const router = express.Router();
-const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
+const usersRouter = require('./routes/users');
 const companyRouter = require('./routes/company');
-// const socketRouter = require('./socket');
+const passport = require("passport");
 const { Server } = require('socket.io');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger_output');
 const http = require('http');
 const server = http.createServer(app);
 const io = new Server(server);
-const passport = require('passport');
 
-
-
-// 출처: https://dydals5678.tistory.com/130 [아빠개발자의 노트:티스토리]
+const mainRouter = require('./routes/main')
+const authRouter = require('./routes/auth')
+const cookieParser = require('cookie-parser');
 
 
 
@@ -50,17 +50,69 @@ app.use(express.urlencoded({ extended: false }));
 // })
 // );
 
-app.use('/api', [usersRouter, postsRouter, companyRouter]);
+//----------------------------------------------------------------
+app.set('view engine', 'ejs');
+app.use(session({secret:'MySecret', resave: false, saveUninitialized:true}));
 
+// Passport setting
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Routes
+app.use('/', require('./routes/main'));
+app.use('/auth', require('./routes/auth'));
+
+
+// ----------------------------------------------------------------
+app.use('/api', [usersRouter, postsRouter, companyRouter]);
+app.use('/', [mainRouter,authRouter])
 
 app.get('/', (req, res) => {
   res.send('헬로 월드');
 });
 
-app.post('/login',
-    passport.authenticate('local'),
-    function(req,res) {
-        res.redirect('/users/'+req.user.username);
+
+app.get('/chat', (req, res) => {
+  res.sendFile(__dirname + '/chat.html');
+});
+
+
+
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
+
+
+
+
+
+
+
+
+
+
+
+// ------------
+io.on('connection', (socket) => {
+  socket.on('disconnect', () => {
+    io.emit('send message', {
+      message: `${socket.username} 님께서 채팅창을 떠났습니다. ${createdAt}`,
+      user: '환영합니다',
+    });
+  });
+
+  socket.on('new message', (msg) => {
+    console.log(msg);
+    io.emit('send message', { message: msg, user: socket.username });
+  });
+
+  socket.on('new user', (usr) => {
+    socket.username = usr;
+    io.emit('send message', {
+      message: `${socket.username} 님이 채팅에 참여하셨습니다.`,
+      user: '(',
+
     });
 
 // app.get('/chat', (req, res) => {
