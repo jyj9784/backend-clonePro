@@ -112,8 +112,11 @@ io.on('connection', (socket) => {
     io.emit('send message', {
       message: `${socket.username} 님이 채팅에 참여하셨습니다.`,
       user: '(',
-
     });
+
+  });
+
+})
 
 // app.get('/chat', (req, res) => {
 //   res.sendFile(__dirname + '/chat.html');
@@ -150,8 +153,3 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
   console.log(port, '포트가 켜졌습니다.');
 });
-
-
-
-
-
