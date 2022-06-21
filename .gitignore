@@ -6,3 +6,14 @@
 
 /LICENSE
 
+
+/passports
+
+/routes/router.js
+
+/routes/globalRouter.js
+/routes/userRouter.js
+
+/models
+/passport
+
