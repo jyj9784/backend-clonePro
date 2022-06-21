@@ -302,8 +302,8 @@ router.get('/communities', authMiddleware, async (req, res) => {
   }
 });
 //채팅조회
-router.get('/chat/lists', authMiddleware, (req, res, next) => {
-  Message.find()
+router.get('/chat/lists', async (req, res) => {
+  await Message.find()
           .exec((err, result) => {
               if (err) return res.send(null);
               res.send(result);
