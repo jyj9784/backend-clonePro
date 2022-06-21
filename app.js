@@ -102,7 +102,41 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 //   });
 
-// })
+// <<<<<<< hayeon
+// // })
+// =======
+
+
+
+
+
+
+
+// // ------------
+// io.on('connection', (socket) => {
+//   socket.on('disconnect', () => {
+//     io.emit('send message', {
+//       message: `${socket.username} 님께서 채팅창을 떠났습니다. ${createdAt}`,
+//       user: '환영합니다',
+//     });
+//   });
+
+//   socket.on('new message', (msg) => {
+//     console.log(msg);
+//     io.emit('send message', { message: msg, user: socket.username });
+//   });
+
+//   socket.on('new user', (usr) => {
+//     socket.username = usr;
+//     io.emit('send message', {
+//       message: `${socket.username} 님이 채팅에 참여하셨습니다.`,
+//       user: '(',
+//     });
+// >>>>>>> main
+
+  });
+
+})
 
 // app.get('/chat', (req, res) => {
 //   res.sendFile(__dirname + '/chat.html');
@@ -137,4 +171,6 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.listen(port, () => {
   console.log(port, '포트가 켜졌습니다.');
+
 });
+
