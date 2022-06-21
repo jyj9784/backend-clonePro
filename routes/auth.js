@@ -1,25 +1,35 @@
-const router = require("express").Router();
-const passport = require('passport');
+var express = require('express');
+var router = express.Router();
+var passport = require('../config/passport.js');
 
-// 카카오로 로그인하기 라우터
-router.get('/kakao', passport.authenticate('kakao'));
+// 로그인 API
 
-router.get('/kakao/callback', (req, res, next) => {
-    passport.authenticate(
-      "kakao",
-      { failureRedirect: "/" },
-      (err, user) => {
-        if (err) return next(err);
-        const { id, nickname } = user;
-        const token = jwt.sign({ id, nickname }, process.env.TOKENKEY, { expiresIn: '2h'});
-        result = {
-          token,
-          id: user.id,
-          nickname: user.nickname,
-        };
-        res.send({ user: result });
-      }
-    )(req, res, next);
-  });
+router.get('/login', function (req, res) {
+  res.render('auth/login');
+});
 
- module.exports = router;
+// 로그아웃 API
+router.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+// 구글로 로그인하기 Router
+router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+
+
+
+// 그리고 passport 로그인 전략에 의해 googleStrategy로 가서 구글계정 정보와 DB를 비교해서 회원가입시키거나 로그인 처리하게 한다.
+router.get(
+  '/google/callback',
+  passport.authenticate('google'),
+  authSuccess
+);
+
+
+
+function authSuccess(req, res) {
+  res.redirect('/');
+}
+
+module.exports = router;

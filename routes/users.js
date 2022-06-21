@@ -11,7 +11,6 @@ const authMiddleware = require('../middlewares/auth-middleware');
 const Bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 
-
 // console.log(process.env.SECRET_KEY)
 
 //회원가입 양식
@@ -75,37 +74,43 @@ router.post('/users/signup', async (req, res) => {
     const salt = await Bcrypt.genSalt(Number(process.env.SaltKEY));
     const hashPassword = await Bcrypt.hash(password, salt);
 
-    const user = new User({ userid, password: hashPassword, profileimage, username, position });
+    const user = new User({
+      userid,
+      password: hashPassword,
+      profileimage,
+      username,
+      position,
+    });
     await user.save();
-    
+
     // 메일발송 객체(원래 구글로 하려했으나 네이버로 변경)
     let transporter = nodemailer.createTransport({
       service: 'naver', // 메일 이용할 서비스
       host: 'smtp.naver.com', // SMTP 서버명
       port: 587, // SMTP 포트
       auth: {
-          user: process.env.NODEMAILER_USER, // 사용자 이메일
-          pass: process.env.NODEMAILER_PASS // 사용자 패스워드
+        user: process.env.NODEMAILER_USER, // 사용자 이메일
+        pass: process.env.NODEMAILER_PASS, // 사용자 패스워드
       },
-  });
-  
+    });
+
     // 메일 옵션
     let mailOptions = {
-        from: process.env.NODEMAILER_USER, // 메일 발신자
-        to: req.body.userid,   // 메일 수신자
-        // 회원가입 완료하고 축하 메시지 전송할 시
-        // to: req.body.userid
-        subject: 'testing', // 메일 제목
-        text: 'nodemailer testing' // 메일 내용
-    }
+      from: process.env.NODEMAILER_USER, // 메일 발신자
+      to: req.body.userid, // 메일 수신자
+      // 회원가입 완료하고 축하 메시지 전송할 시
+      // to: req.body.userid
+      subject: 'testing', // 메일 제목
+      text: 'nodemailer testing', // 메일 내용
+    };
     // 메일 발송
-    transporter.sendMail(mailOptions, function(err, success){
-      if(err) {
-          console.log(err)
+    transporter.sendMail(mailOptions, function (err, success) {
+      if (err) {
+        console.log(err);
       } else {
-          console.log('Email sent successfully!')
+        console.log('Email sent successfully!');
       }
-  });
+    });
 
     res.status(201).send({
       success: true,
@@ -159,7 +164,7 @@ router.post('/users/companies/signup', async (req, res) => {
 
     const salt = await Bcrypt.genSalt(Number(process.env.SaltKEY));
     const hashPassword = await Bcrypt.hash(password, salt);
-  
+
     const cp_user = new CompanyUser({
       userid,
       password: hashPassword,
@@ -180,28 +185,28 @@ router.post('/users/companies/signup', async (req, res) => {
       host: 'smtp.naver.com', // SMTP 서버명
       port: 587, // SMTP 포트
       auth: {
-          user: process.env.NODEMAILER_USER, // 사용자 이메일
-          pass: process.env.NODEMAILER_PASS // 사용자 패스워드
+        user: process.env.NODEMAILER_USER, // 사용자 이메일
+        pass: process.env.NODEMAILER_PASS, // 사용자 패스워드
       },
-  });
-  
+    });
+
     // 메일 옵션
     let mailOptions = {
-        from: process.env.NODEMAILER_USER, // 메일 발신자
-        to: req.body.userid,   // 메일 수신자
-        // 회원가입 완료하고 축하 메시지 전송할 시
-        // to: req.body.userid
-        subject: 'testing', // 메일 제목
-        text: 'nodemailer testing' // 메일 내용
-    }
+      from: process.env.NODEMAILER_USER, // 메일 발신자
+      to: req.body.userid, // 메일 수신자
+      // 회원가입 완료하고 축하 메시지 전송할 시
+      // to: req.body.userid
+      subject: 'testing', // 메일 제목
+      text: 'nodemailer testing', // 메일 내용
+    };
     // 메일 발송
-    transporter.sendMail(mailOptions, function(err, success){
-      if(err) {
-          console.log(err)
+    transporter.sendMail(mailOptions, function (err, success) {
+      if (err) {
+        console.log(err);
       } else {
-          console.log('Email sent successfully!')
+        console.log('Email sent successfully!');
       }
-  });
+    });
     res.status(201).send({
       success: true,
       iscompany: true,
@@ -262,7 +267,7 @@ router.post('/users/login', async (req, res) => {
   }
 
   if (cp_user) {
-    token = jwt.sign({ userid: cp_user.userid }, process.env.SECRET_KEY);
+    token = jwt.sign({ userid: cp_user.userid }, process.env.SECRET_KEY2);
   }
 
   res.send({
