@@ -17,3 +17,5 @@
 /models
 /passport
 
+/chat.html
+/socket.js

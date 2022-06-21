@@ -2,8 +2,7 @@ const dotenv = require('dotenv'); // 설정파일
 dotenv.config();
 const express = require('express');
 const app = express();
-const connect = require('./schemas/');
-
+const connect = require('./schemas/db');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -21,11 +20,9 @@ const http = require('http');
 const server = http.createServer(app);
 const io = new Server(server);
 
-const mainRouter = require('./routes/main')
-const authRouter = require('./routes/auth')
+const mainRouter = require('./routes/main');
+const G_authRouter = require('./routes/google_auth');
 const cookieParser = require('cookie-parser');
-
-
 
 connect();
 
@@ -60,27 +57,21 @@ app.use(passport.session());
 
 // Routes
 app.use('/', require('./routes/main'));
-app.use('/auth', require('./routes/auth'));
-
-// ----------------------------------------------------------------
+app.use('/auth', require('./routes/google_auth'));
 app.use('/api', [usersRouter, postsRouter, companyRouter]);
-app.use('/auth', [mainRouter, authRouter]);
-
+app.use('/auth', [mainRouter, G_authRouter]);
 app.get('/', (req, res) => {
   res.send('헬로 월드');
 });
-
-
 app.get('/chat', (req, res) => {
   res.sendFile(__dirname + '/chat.html');
 });
-
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-// ------------
+
 // io.on('connection', (socket) => {
 //   socket.on('disconnect', () => {
 //     io.emit('send message', {
@@ -88,7 +79,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 //       user: '환영합니다',
 //     });
 //   });
-  
+
 //   socket.on('new message', (msg) => {
 //     console.log(msg);
 //     io.emit('send message', { message: msg, user: socket.username });
@@ -102,17 +93,9 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 //   });
 
-// <<<<<<< hayeon
 // // })
 // =======
 
-
-
-
-
-
-
-// // ------------
 // io.on('connection', (socket) => {
 //   socket.on('disconnect', () => {
 //     io.emit('send message', {
@@ -170,6 +153,4 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.listen(port, () => {
   console.log(port, '포트가 켜졌습니다.');
-
 });
-
