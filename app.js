@@ -132,11 +132,10 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 //       message: `${socket.username} 님이 채팅에 참여하셨습니다.`,
 //       user: '(',
 //     });
-// >>>>>>> main
 
-  });
+//   });
 
-})
+// })
 
 // app.get('/chat', (req, res) => {
 //   res.sendFile(__dirname + '/chat.html');
