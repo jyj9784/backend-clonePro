@@ -18,7 +18,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger_output');
 const http = require('http');
 const server = http.createServer(app);
-
+const Msg = require('./schemas/messages');
 const mainRouter = require('./routes/main');
 const G_authRouter = require('./routes/google_auth');
 const cookieParser = require('cookie-parser');
@@ -91,13 +91,14 @@ chatspace.on("connection", (socket) => {
     
     console.log(data)
   });
-    
-        
+
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);
   });
 });
 });
+
+
 server.listen(port, () => {
   console.log(port, '포트가 켜졌습니다.');
 });

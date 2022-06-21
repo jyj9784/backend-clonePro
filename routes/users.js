@@ -10,6 +10,8 @@ const jwtSecret = process.env.SECRET_KEY;
 const authMiddleware = require('../middlewares/auth-middleware');
 const Bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
+const Message = require('../schemas/messages');
+
 
 // console.log(process.env.SECRET_KEY)
 
@@ -288,7 +290,6 @@ router.get('/userlists', async (req, res) => {
     user_list,
   });
 });
-
 //커뮤니티 페이지 조회
 router.get('/communities', authMiddleware, async (req, res) => {
   try {
@@ -300,6 +301,15 @@ router.get('/communities', authMiddleware, async (req, res) => {
       res.status(400).send("정보 전달 오류");
   }
 });
+//채팅조회
+router.get('/chat/lists', authMiddleware, (req, res, next) => {
+  Message.find()
+          .exec((err, result) => {
+              if (err) return res.send(null);
+              res.send(result);
+          });
+});
+
 
 // router.get('/profile', authMiddleware, async (req, res)=>{
 //   try {
