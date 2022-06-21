@@ -1,7 +1,7 @@
 // config/passport.js
 
 
-const User = require('../schemas/user')
+const GUser = require('../schemas/googleUser')
 
 var passport         = require('passport');
 var GoogleStrategy   = require('passport-google-oauth2').Strategy;
@@ -19,22 +19,36 @@ passport.use(new GoogleStrategy(
     clientSecret  : process.env.GOOGLE_SECRET,
     callbackURL   : 'http://localhost:3000/auth/google/callback',
     passReqToCallback   : true
-  }, function(request, accessToken, refreshToken, profile, done){
+  }, 
+  async (request, accessToken, refreshToken, profile, done)=>{
+    
+    
+    
+    
     console.log('profile: ', profile);
+    
     var user = profile;
     
-    
-
-    const userid =user.id;
-    const nickname = user.given_name;
+    const userid ="abc"+user.id.slice(0,7);
+    const username = user.given_name;
     const profileimage = user.picture;
-    const position = "google";
+    const iscompany = false;
 
-    const user_save= new User({userid, nickname, profileimage, position})
-    user_save.save();
+    const exUser = await GUser.findOne({userid})
     
+    
+    if (exUser) {
+      done(null, exUser); 
 
-    done(null, user);
+    }else{
+
+      const user_save= new GUser({userid, username, profileimage, iscompany})
+      user_save.save();
+
+
+    }
+
+  
   }
 ));
 
