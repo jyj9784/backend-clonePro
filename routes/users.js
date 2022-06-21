@@ -289,6 +289,18 @@ router.get('/userlists', async (req, res) => {
   });
 });
 
+//커뮤니티 페이지 조회
+router.get('/communities', authMiddleware, async (req, res) => {
+  try {
+      const {user} = res.locals;
+      const username = user[0].username;
+      const profileimage = user[0].profileimage;
+      res.json({username, profileimage});
+  } catch(err) {
+      res.status(400).send("정보 전달 오류");
+  }
+});
+
 // router.get('/profile', authMiddleware, async (req, res)=>{
 //   try {
 //     const {user} = res.locals;

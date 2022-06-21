@@ -117,4 +117,6 @@ router.get('/postings', async (req, res) => {
     }
 });
 
+
+
 module.exports = router;
