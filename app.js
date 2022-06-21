@@ -7,7 +7,7 @@ const connect = require('./schemas/');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const morgan = require('morgan');
-const port = 3000;
+const port = 8080;
 const router = express.Router();
 const usersRouter = require('./routes/users');
 const postsRouter = require('./routes/posts');
@@ -19,16 +19,11 @@ const swaggerFile = require('./swagger_output');
 const http = require('http');
 const server = http.createServer(app);
 const io = new Server(server);
-const passport = require('passport');
-
-
-
-// 출처: https://dydals5678.tistory.com/130 [아빠개발자의 노트:티스토리]
-
+const passportConfig = require('./passport');
 
 
 connect();
-
+passportConfig();
 
 const moment = require("moment");
 require("moment-timezone");
@@ -43,25 +38,12 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(express.static('static'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(session({
-//   secret: "ajhdfjdanfadf",
-//   resave: true,
-//   saveUninitialized : false
-// })
-// );
-
 app.use('/api', [usersRouter, postsRouter, companyRouter]);
 
 
 app.get('/', (req, res) => {
   res.send('헬로 월드');
 });
-
-app.post('/login',
-    passport.authenticate('local'),
-    function(req,res) {
-        res.redirect('/users/'+req.user.username);
-    });
 
 // app.get('/chat', (req, res) => {
 //   res.sendFile(__dirname + '/chat.html');

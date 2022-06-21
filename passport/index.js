@@ -1,21 +1,39 @@
-const passport = require('passport');
-// const local = require('./localStrategy'); // 로컬서버로 로그인할때
-const kakao = require('./kakaoStrategy'); // 카카오서버로 로그인할때
- 
-const User = require('../schemas/users');
- 
+const User = require('../schemas/user');
+const passport = require("passport");
+const KakaoStrategy = require("passport-kakao").Strategy;
+
 module.exports = () => {
-   // serialize는 어떤 정보를 쿠키에 주느냐를 의미
-   passport.serializeUser((user, done) => {
-      done(null, user.id);
-   });
-   // deserialize는 쿠키에 저장되어있는 userid로 어떻게 사용자를 찾느냐는 의미
-   passport.deserializeUser((id, done) => {
-      User.findOne({ where: { id } })
-         .then(user => done(null, user))
-         .catch(err => done(err));
-   }); 
- 
-//    local();
-   kakao(); // 카카오 전략 등록
-};
+    passport.use(
+      new KakaoStrategy(
+        {
+          clientID: process.env.KAKAO_ID,
+          callbackURL: process.env.KAKAO_URL,
+        },
+
+        async (accessToken, refreshToken, profile, done) => {
+          try {
+            const exUser = await User.findOne({
+              // 카카오 플랫폼에서 로그인 했고 & snsId필드에 카카오 아이디가 일치할경우
+                id: profile.id, provider: "kakao" 
+            });
+            // 이미 가입된 카카오 프로필이면 성공
+            if (exUser) {
+              done(null, exUser); // 로그인 인증 완료
+            } else {
+              // 가입되지 않는 유저면 회원가입 시키고 로그인을 시킨다
+              const newNickname = Date.now();
+              const newUser = await User.create({
+                nickname: newNickname.toString(),
+                id: profile.id,
+                provider: "kakao",
+              });
+              done(null, newUser); // 회원가입하고 로그인 인증 완료
+            }
+          } catch (error) {
+            console.error(error);
+            done(error);
+          }
+        }
+      )
+    );
+}
