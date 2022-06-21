@@ -17,7 +17,9 @@ router.post('/postings', authMiddlewareCo, async (req, res) => {
         const profileimage = user[0].profileimage;
         const intro = user[0].intro;
         const address = user[0].address;
-
+        const country = user[0].country;
+        const region = user[0].region;
+        console.log(country)
         // console.log(userid)
         // postingid 자동으로 생성되게 설정
         const maxpostingid = await Post.findOne().sort('-postingid');
@@ -28,7 +30,7 @@ router.post('/postings', authMiddlewareCo, async (req, res) => {
         // 로그인했을 때 userid와 일치하는 회사정보를 찾아 companyinfo 변수에 담음
         // const companyinfo = await CompanyUser.findOne({ userid }, { companyname: 1, profileimage: 1, intro: 1, image: 1, address: 1 });
         // console.log(companyinfo)
-        const { thumbnail, title, maincontent, subcontent, userimage, position } = req.body;
+        const { thumbnail, title, maincontent, subcontent, position } = req.body;
 
         const recruit = await Post.create({
             postingid,
@@ -37,11 +39,12 @@ router.post('/postings', authMiddlewareCo, async (req, res) => {
             profileimage,
             intro,
             address,
+            country,
+            region,
             thumbnail,
             title,
             maincontent,
             subcontent,
-            userimage,
             position,
         });
         // console.log(recruit)
@@ -104,7 +107,7 @@ router.get('/postings', async (req, res) => {
     try {
         const posts = await Post.find({}).sort({ postingid: -1});
         console.log(posts)
-        const companyinfo = await CompanyUser.find({}, { companyname: 1, profileimage: 1, intro: 1, image: 1, address: 1 });
+        const companyinfo = await CompanyUser.find({}, { companyname: 1, profileimage: 1, intro: 1, image: 1, address: 1, industry: 1 });
         console.log(companyinfo)
         const info = {};
         info.posts = posts;

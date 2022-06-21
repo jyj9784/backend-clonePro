@@ -19,7 +19,7 @@ const companyuserSchema = new mongoose.Schema({
   },
 
   image: {
-    type: String,
+    type: Array,
   },
 
   companyname: {
@@ -33,6 +33,18 @@ const companyuserSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+
+  country: {
+    type: String,
+  },
+
+  region: {
+    type: String,
+  },
+  
+  industry: {
+    type: String,
+  }
 });
 
 module.exports = mongoose.model('Companyuser', companyuserSchema);
