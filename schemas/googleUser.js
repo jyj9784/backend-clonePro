@@ -10,7 +10,7 @@ const GuserSchema = new mongoose.Schema({
   },
 
   userid: {
-    type: String, 
+    type: String,
     unique: true,
   },
 
