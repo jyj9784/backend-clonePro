@@ -15,7 +15,6 @@ const companyuserSchema = new mongoose.Schema({
 
   profileimage: {
     type: String,
-    
   },
 
   image: {
