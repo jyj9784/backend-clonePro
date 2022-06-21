@@ -27,9 +27,6 @@ router.post('/postings', authMiddlewareCo, async (req, res) => {
         if (maxpostingid) {
             postingid = maxpostingid.postingid+1;
         }
-        // 로그인했을 때 userid와 일치하는 회사정보를 찾아 companyinfo 변수에 담음
-        // const companyinfo = await CompanyUser.findOne({ userid }, { companyname: 1, profileimage: 1, intro: 1, image: 1, address: 1 });
-        // console.log(companyinfo)
         const { thumbnail, title, maincontent, subcontent, position } = req.body;
 
         const recruit = await Post.create({

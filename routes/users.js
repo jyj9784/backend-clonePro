@@ -274,8 +274,6 @@ router.post('/users/login', async (req, res) => {
     token: token,
     success: true,
     iscompany: iscompany,
-    username: user.username,
-    profileimage: user.profileimage,
 
     msg: '로그인에 성공 하였습니다.',
   });
@@ -306,5 +304,19 @@ router.get('/userlists', async (req, res) => {
 //     });
 //   }
 // });
+
+router.get('/communities', authMiddleware, async (req, res) => {
+  try {
+      const {user} = res.locals;
+      console.log(user)
+      const username = user[0].username;
+      console.log(username)
+      const profileimage = user[0].profileimage;
+      console.log(profileimage)
+      res.json({username, profileimage});
+  } catch(err) {
+      res.status(400).send('정보 전달 오류');
+  }
+});
 
 module.exports = router;

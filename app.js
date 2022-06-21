@@ -3,17 +3,22 @@ dotenv.config();
 const express = require('express');
 const app = express();
 const connect = require('./schemas/');
+
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 const morgan = require('morgan');
 const session = require('express-session');
+const port = 3000;
 const router = express.Router();
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
-const companyRouter = require('./routes/company');
 const passport = require('passport');
+const { Server } = require('socket.io');
 const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger_output');
+const http = require('http');
+const server = http.createServer(app);
+
 const mainRouter = require('./routes/main')
 const authRouter = require('./routes/auth')
 const cookieParser = require('cookie-parser');
@@ -56,7 +61,7 @@ app.use('/', require('./routes/main'));
 app.use('/auth', require('./routes/auth'));
 
 // ----------------------------------------------------------------
-app.use('/api', [usersRouter, postsRouter, companyRouter]);
+app.use('/api', [usersRouter, postsRouter]);
 app.use('/auth', [mainRouter, authRouter]);
 
 app.get('/', (req, res) => {
@@ -71,6 +76,37 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on("join_room", (data) => {
+    socket.join(data);
+    console.log(`User with ID: ${socket.id} joined room: ${data}`);
+  });
+
+  socket.on("send_message", (data) => {
+    const message = new Msg(data);
+
+    socket.to(data.room).emit("receive_message", data);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("User Disconnected", socket.id);
+  });
+});
+
+server.listen(3000, () => {
+  console.log("SERVER RUNNING");
+});
+
 
 // ------------
 // io.on('connection', (socket) => {
@@ -155,6 +191,3 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 //         io.emit('message',({name, message}))
 //     })
 // })
-
-
-module.exports = app;
