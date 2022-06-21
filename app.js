@@ -54,7 +54,7 @@ app.use('/auth', require('./routes/auth'));
 
 // ----------------------------------------------------------------
 app.use('/api', [usersRouter, postsRouter, companyRouter]);
-app.use('/', [mainRouter, authRouter]);
+app.use('/auth', [mainRouter, authRouter]);
 
 app.get('/', (req, res) => {
   res.send('헬로 월드');

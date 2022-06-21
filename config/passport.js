@@ -32,7 +32,7 @@ passport.use(new GoogleStrategy(
     const userid ="abc"+user.id.slice(0,7);
     const username = user.given_name;
     const profileimage = user.picture;
-    const google = true;
+    const iscompany = false;
 
     const exUser = await GUser.findOne({userid})
     
@@ -42,7 +42,7 @@ passport.use(new GoogleStrategy(
 
     }else{
 
-      const user_save= new GUser({userid, username, profileimage, google})
+      const user_save= new GUser({userid, username, profileimage, iscompany})
       user_save.save();
 
 

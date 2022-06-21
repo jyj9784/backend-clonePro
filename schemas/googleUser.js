@@ -18,8 +18,8 @@ const GuserSchema = new mongoose.Schema({
     type: String,
   },
 
-  google: {
-    type: Boolean,
+  iscompany: {
+    type: String,
   },
 });
 
