@@ -1,6 +1,7 @@
 const Post = require('../schemas/post');
 const CompanyUser = require('../schemas/companyuser');
 
+//채용정보 등록
 async function recruitpost(req, res) {
   try {
     const { user } = res.locals;
@@ -47,6 +48,7 @@ async function recruitpost(req, res) {
   }
 }
 
+//채용정보수정
 async function recruitfixment(req, res) {
   try {
     const { postingid } = req.params;
@@ -65,7 +67,7 @@ async function recruitfixment(req, res) {
     res.status(400).send('채용정보 수정 오류');
   }
 }
-
+//채용정보삭제
 async function recruitdelete(req, res) {
   try {
     const { postingid } = req.params;
@@ -82,7 +84,26 @@ async function recruitdelete(req, res) {
     res.status(400).send('채용정보 삭제 오류');
   }
 }
+//채용정보상태수정
+async function recruitstatusfixment(req, res){
+  try {
+    const { postingid } = req.params;
+    const { status } = req.body;
+    const { user } = res.locals;
+    const userid = user[0].userid;
+    const list = await Post.findOne({ postingid });
 
+    if (userid === list.userid) {
+      await Post.updateOne({ postingid }, { $set: req.body });
+      res.status(201).send({ success: true });
+    } else {
+      res.status(403).send('상태 수정 권한이 없습니다.');
+    }
+  } catch {
+    res.status(400).send('채용정보 수정 오류');
+  }
+}
+//채용정보조회
 async function recruitget(req, res) {
   try {
     const posts = await Post.find({ status: true }).sort({ postingid: -1 });
@@ -111,4 +132,5 @@ module.exports = {
   recruitfixment,
   recruitdelete,
   recruitget,
+  recruitstatusfixment
 };
