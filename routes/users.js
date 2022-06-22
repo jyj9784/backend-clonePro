@@ -101,8 +101,14 @@ router.post('/users/signup', async (req, res) => {
       to: req.body.userid, // 메일 수신자
       // 회원가입 완료하고 축하 메시지 전송할 시
       // to: req.body.userid
-      subject: 'testing', // 메일 제목
-      text: 'nodemailer testing', // 메일 내용
+      subject: `${req.body.username}님 원티드 회원가입을 축하합니다.`, // 메일 제목
+      html: `<h2>${req.body.username}님의 커리어 행복을 응원합니다.</h2>
+            <br/>
+            <p>취업, 이직부터 커리어 성장, 사이드 프로젝트까지!</p>
+            <p>원티드 200% 활용법을 확인해 보세요.</p>
+            <p><img src="https://www.venturesquare.net/wp-content/uploads/2022/02/%EC%9B%90%ED%8B%B0%EB%93%9C%EB%9E%A9-789x404.jpg" width=400, height=200/></p>
+            <br/>
+            <p>이것은 test 메일입니다.</p>`
     };
     // 메일 발송
     transporter.sendMail(mailOptions, function (err, success) {
@@ -197,8 +203,14 @@ router.post('/users/companies/signup', async (req, res) => {
       to: req.body.userid, // 메일 수신자
       // 회원가입 완료하고 축하 메시지 전송할 시
       // to: req.body.userid
-      subject: 'testing', // 메일 제목
-      text: 'nodemailer testing', // 메일 내용
+      subject: `${req.body.companyname}님 원티드 회원가입을 축하합니다.`, // 메일 제목
+      html: `<h2>${req.body.companyname}님의 인재 채용을 응원합니다.</h2>
+            <br/>
+            <p>딱 맞는 인재부터 숨겨진 인재까지!</p>
+            <p>원티드와 함께 스마트한 채용을 확인해 보세요.</p>
+            <p><img src="https://www.venturesquare.net/wp-content/uploads/2022/02/%EC%9B%90%ED%8B%B0%EB%93%9C%EB%9E%A9-789x404.jpg" width=400, height=200/></p>
+            <br/>
+            <p>이것은 test 메일입니다.</p>`
     };
     // 메일 발송
     transporter.sendMail(mailOptions, function (err, success) {
