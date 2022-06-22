@@ -26,6 +26,7 @@ router.put('/mark/:postingid', authMiddleware, async (req, res) => {
         position: 1,
         intro: 1,
         address: 1,
+        status: 1,
         _id: 0,
       }
     );
@@ -34,11 +35,18 @@ router.put('/mark/:postingid', authMiddleware, async (req, res) => {
 
     for (let i = 0; i < existsmarks.length; i++) {
       if (existsmarks[i].markList[0].postingid === Number(postingid)) {
-        await Mypage.deleteOne({ postingid: Number(postingid) });
-        res.send('삭제시킴.');
-      } else {
-        Mypage.create({ userid, markList });
+        m = 1
       }
+    }
+    if (m === 1) {
+      await Mypage.deleteOne({ postingid: Number(postingid) });
+      res.send(`${postingid} 삭제됨.`);
+    } else {
+      await Mypage.create({
+        userid,
+        markList,
+      });
+      res.send({ postingid, success: true });
     }
   } catch (err) {
     res.status(400).send('마크 오류');
