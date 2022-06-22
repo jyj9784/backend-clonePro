@@ -12,7 +12,6 @@ const usersRouter = require('./routes/users');
 const comypageRouter = require('./routes/mypage_co');
 const mypageRouter = require('./routes/mypage');
 const communityRouter = require('./routes/community');
-const mainRouter = require('./routes/main');
 const G_authRouter = require('./routes/google_auth');
 const passport = require('passport');
 const { Server } = require('socket.io');
@@ -46,8 +45,6 @@ app.use(
 // Passport setting
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/', require('./routes/main'));
-app.use('/auth', require('./routes/google_auth'));
 app.use('/api', [
   usersRouter,
   postsRouter,
@@ -55,10 +52,8 @@ app.use('/api', [
   mypageRouter,
   communityRouter
 ]);
-app.use('/auth', [mainRouter, G_authRouter]);
-app.get('/', (req, res) => {
-  res.send('헬로 월드');
-});
+app.use('/auth', G_authRouter);
+
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -93,6 +88,10 @@ chatspace.on('connection', (socket) => {
       console.log('User Disconnected', socket.id);
     });
   });
+});
+
+app.get('/', (req, res) => {
+  res.send('헬로 월드');
 });
 server.listen(port, () => {
   console.log(port, '포트가 켜졌습니다.');
