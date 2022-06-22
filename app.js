@@ -21,11 +21,10 @@ const http = require('http');
 const server = http.createServer(app);
 const io = new Server(server);
 
-const mainRouter = require('./routes/main')
-const authRouter = require('./routes/auth')
+// const boardRouter = require('./routes/board_list');
+const mainRouter = require('./routes/main');
+const authRouter = require('./routes/auth');
 const cookieParser = require('cookie-parser');
-
-
 
 connect();
 
@@ -70,7 +69,6 @@ app.get('/', (req, res) => {
   res.send('헬로 월드');
 });
 
-
 app.get('/chat', (req, res) => {
   res.sendFile(__dirname + '/chat.html');
 });
@@ -88,7 +86,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 //       user: '환영합니다',
 //     });
 //   });
-  
+
 //   socket.on('new message', (msg) => {
 //     console.log(msg);
 //     io.emit('send message', { message: msg, user: socket.username });

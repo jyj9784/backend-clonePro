@@ -40,10 +40,10 @@ const companyuserSchema = new mongoose.Schema({
   region: {
     type: String,
   },
-  
+
   industry: {
     type: String,
-  }
+  },
 });
 
 module.exports = mongoose.model('Companyuser', companyuserSchema);

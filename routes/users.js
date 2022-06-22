@@ -1,19 +1,22 @@
 const dotenv = require('dotenv');
+
 dotenv.config();
 const express = require('express');
-const User = require('../schemas/user');
-const CompanyUser = require('../schemas/companyuser');
+
 const router = express.Router();
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
+
 const jwtSecret = process.env.SECRET_KEY;
-const authMiddleware = require('../middlewares/auth-middleware');
 const Bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
+const authMiddleware = require('../middlewares/auth-middleware');
+const CompanyUser = require('../schemas/companyuser');
+const User = require('../schemas/user');
 
 // console.log(process.env.SECRET_KEY)
 
-//회원가입 양식
+// 회원가입 양식
 const postUsersSchema = Joi.object({
   userid: Joi.string().required().email(),
   password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$')).required(),
@@ -38,7 +41,7 @@ const postUsersSchema2 = Joi.object({
   industry: Joi.string().required(),
 });
 
-//회원가입 - 개인
+// 회원가입 - 개인
 router.post('/users/signup', async (req, res) => {
   try {
     const {
@@ -49,7 +52,12 @@ router.post('/users/signup', async (req, res) => {
       profileimage,
       position,
     } = await postUsersSchema.validateAsync(req.body);
-    console.log({ userid, password, confirmpassword, profileimage });
+    console.log({
+      userid,
+      password,
+      confirmpassword,
+      profileimage,
+    });
 
     if (password !== confirmpassword) {
       return res.status(400).send({
@@ -84,7 +92,7 @@ router.post('/users/signup', async (req, res) => {
     await user.save();
 
     // 메일발송 객체(원래 구글로 하려했으나 네이버로 변경)
-    let transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       service: 'naver', // 메일 이용할 서비스
       host: 'smtp.naver.com', // SMTP 서버명
       port: 587, // SMTP 포트
@@ -95,7 +103,7 @@ router.post('/users/signup', async (req, res) => {
     });
 
     // 메일 옵션
-    let mailOptions = {
+    const mailOptions = {
       from: process.env.NODEMAILER_USER, // 메일 발신자
       to: req.body.userid, // 메일 수신자
       // 회원가입 완료하고 축하 메시지 전송할 시
@@ -104,7 +112,7 @@ router.post('/users/signup', async (req, res) => {
       text: 'nodemailer testing', // 메일 내용
     };
     // 메일 발송
-    transporter.sendMail(mailOptions, function (err, success) {
+    transporter.sendMail(mailOptions, (err, success) => {
       if (err) {
         console.log(err);
       } else {
@@ -125,7 +133,7 @@ router.post('/users/signup', async (req, res) => {
   }
 });
 
-//회원가입 - 기업
+// 회원가입 - 기업
 router.post('/users/companies/signup', async (req, res) => {
   try {
     const {
@@ -180,7 +188,7 @@ router.post('/users/companies/signup', async (req, res) => {
     await cp_user.save();
 
     // 메일발송 객체(원래 구글로 하려했으나 네이버로 변경)
-    let transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
       service: 'naver', // 메일 이용할 서비스
       host: 'smtp.naver.com', // SMTP 서버명
       port: 587, // SMTP 포트
@@ -191,7 +199,7 @@ router.post('/users/companies/signup', async (req, res) => {
     });
 
     // 메일 옵션
-    let mailOptions = {
+    const mailOptions = {
       from: process.env.NODEMAILER_USER, // 메일 발신자
       to: req.body.userid, // 메일 수신자
       // 회원가입 완료하고 축하 메시지 전송할 시
@@ -200,7 +208,7 @@ router.post('/users/companies/signup', async (req, res) => {
       text: 'nodemailer testing', // 메일 내용
     };
     // 메일 발송
-    transporter.sendMail(mailOptions, function (err, success) {
+    transporter.sendMail(mailOptions, (err, success) => {
       if (err) {
         console.log(err);
       } else {
@@ -220,7 +228,7 @@ router.post('/users/companies/signup', async (req, res) => {
   }
 });
 
-//로그인
+// 로그인
 router.post('/users/login', async (req, res) => {
   const { userid, password } = req.body;
   const user = await User.findOne({ userid });
@@ -271,9 +279,9 @@ router.post('/users/login', async (req, res) => {
   }
 
   res.send({
-    token: token,
+    token,
     success: true,
-    iscompany: iscompany,
+    iscompany,
     msg: '로그인에 성공 하였습니다.',
   });
 });
