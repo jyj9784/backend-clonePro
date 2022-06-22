@@ -12,9 +12,7 @@ const Bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const Message = require('../schemas/messages');
 
-// console.log(process.env.SECRET_KEY)
-
-//회원가입 양식
+//회원가입 검증 양식1 - 개인회원
 const postUsersSchema = Joi.object({
   userid: Joi.string().required().email(),
   password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$')).required(),
@@ -24,7 +22,7 @@ const postUsersSchema = Joi.object({
   position: Joi.string().required(),
 });
 
-// 회원가입 양식2
+// 회원가입 검증 양식2 - 기업회원
 const postUsersSchema2 = Joi.object({
   userid: Joi.string().required().email(),
   password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,12}$')).required(),
@@ -50,7 +48,6 @@ router.post('/users/signup', async (req, res) => {
       profileimage,
       position,
     } = await postUsersSchema.validateAsync(req.body);
-    console.log({ userid, password, confirmpassword, profileimage });
 
     if (password !== confirmpassword) {
       return res.status(400).send({
@@ -239,8 +236,6 @@ router.post('/users/login', async (req, res) => {
   const user = await User.findOne({ userid });
   const cp_user = await CompanyUser.findOne({ userid });
 
-  console.log(user, 'cp_user:', cp_user);
-
   let iscompany = '';
 
   if (user) {
@@ -266,8 +261,6 @@ router.post('/users/login', async (req, res) => {
   if (cp_user) {
     validPassword = await Bcrypt.compare(password, cp_user.password);
   }
-
-  console.log(validPassword);
 
   if (!validPassword) {
     return res.send('비밀번호가 틀렸습니다..');
@@ -324,9 +317,7 @@ router.get('/chat/lists', async (req, res) => {
 router.get('/profile', authMiddleware, async (req, res) => {
   try {
     const { user } = res.locals;
-    console.log(user);
     const userid = user[0].userid;
-    console.log(userid);
     res.json(userid);
   } catch (err) {
     console.log(err);
@@ -339,11 +330,8 @@ router.get('/profile', authMiddleware, async (req, res) => {
 router.get('/communities', authMiddleware, async (req, res) => {
   try {
     const { user } = res.locals;
-    console.log(user);
     const username = user[0].username;
-    console.log(username);
     const profileimage = user[0].profileimage;
-    console.log(profileimage);
     res.json({ username, profileimage });
   } catch (err) {
     res.status(400).send('정보 전달 오류');
