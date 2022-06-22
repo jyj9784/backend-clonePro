@@ -1,5 +1,8 @@
 // config/passport.js
 
+const dotenv = require('dotenv'); // 설정파일
+dotenv.config();
+
 const GUser = require('../schemas/googleUser');
 
 var passport = require('passport');
