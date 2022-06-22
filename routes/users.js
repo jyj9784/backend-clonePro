@@ -312,20 +312,20 @@ router.get('/chat/lists', async (req, res) => {
 });
 
 
-// router.get('/profile', authMiddleware, async (req, res)=>{
-//   try {
-//     const {user} = res.locals;
-//     console.log(user)
-//     const userid = user[0].userid;
-//     console.log(userid)
-//     res.json( userid );
-//   } catch (err) {
-//     console.log(err);
-//     res.status(400).send({
-//       errorMessage: '요청한 데이터 형식이 올바르지 않습니다.',
-//     });
-//   }
-// });
+router.get('/profile', authMiddleware, async (req, res)=>{
+  try {
+    const {user} = res.locals;
+    console.log(user)
+    const userid = user[0].userid;
+    console.log(userid)
+    res.json( userid );
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({
+      errorMessage: '요청한 데이터 형식이 올바르지 않습니다.',
+    });
+  }
+});
 
 router.get('/communities', authMiddleware, async (req, res) => {
   try {

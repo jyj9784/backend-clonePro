@@ -4,6 +4,7 @@ const router = express.Router();
 const Post = require('../schemas/post');
 const CompanyUser = require('../schemas/companyuser');
 const authMiddlewareCo = require('../middlewares/auth-middleware-co');
+const authMiddleware = require('../middlewares/auth-middleware')
 const Joi = require('joi');
 
 // 채용정보 등록(기업회원 로그인 시 가능)
@@ -148,6 +149,7 @@ router.get('/postings', async (req, res) => {
     res.status(400).send('채용정보 조회 오류');
   }
 });
+
 
 
 
