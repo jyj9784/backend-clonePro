@@ -16,18 +16,10 @@ const G_authRouter = require('./routes/google_auth');
 const passport = require('passport');
 const { Server } = require('socket.io');
 const swaggerUi = require('swagger-ui-express');
-const swaggerFile = require('./swagger_output')
+const swaggerFile = require('./swagger_output');
 const http = require('http');
 const server = http.createServer(app);
-<<<<<<< HEAD
-const io = new Server(server);
-
-// const boardRouter = require('./routes/board_list');
-const mainRouter = require('./routes/main');
-const authRouter = require('./routes/auth');
-=======
 const Msg = require('./schemas/messages');
->>>>>>> 2e49375a0080c43104f8923555db68ab85101359
 const cookieParser = require('cookie-parser');
 
 connect();
@@ -58,17 +50,13 @@ app.use('/api', [
   postsRouter,
   comypageRouter,
   mypageRouter,
-  communityRouter
+  communityRouter,
 ]);
 app.use('/auth', G_authRouter);
 
 // Routes
-app.use('/', require('./routes/main'));
-app.use('/auth', require('./routes/auth'));
-
-// ----------------------------------------------------------------
-app.use('/api', [usersRouter, postsRouter, companyRouter]);
-app.use('/auth', [mainRouter, authRouter]);
+app.use('/api', [usersRouter, postsRouter]);
+app.use('/auth', authRouter);
 
 app.get('/', (req, res) => {
   res.send('헬로 월드');
