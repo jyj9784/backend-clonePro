@@ -56,7 +56,7 @@ app.use('/auth', G_authRouter);
 
 // Routes
 app.use('/api', [usersRouter, postsRouter]);
-app.use('/auth', authRouter);
+app.use('/auth', G_authRouter);
 
 app.get('/', (req, res) => {
   res.send('헬로 월드');
