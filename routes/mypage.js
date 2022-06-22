@@ -26,6 +26,7 @@ router.put('/mark/:postingid', authMiddleware, async (req, res) => {
         position: 1,
         intro: 1,
         address: 1,
+        status: 1,
         _id: 0,
       }
     );
