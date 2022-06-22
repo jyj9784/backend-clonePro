@@ -10,7 +10,6 @@ const jwtSecret = process.env.SECRET_KEY;
 const authMiddleware = require('../middlewares/auth-middleware');
 // const Bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
-const Message = require('../schemas/messages');
 const userController = require('../controller/users');
 
 //회원가입 검증 양식1 - 개인회원
@@ -274,27 +273,5 @@ router.post('/users/login', userController.login);
 //     msg: '로그인에 성공 하였습니다.',
 //   });
 // });
-
-//커뮤니티 페이지 조회
-router.get('/communities', authMiddleware, async (req, res) => {
-  try {
-    const { user } = res.locals;
-    const username = user[0].username;
-    const profileimage = user[0].profileimage;
-    res.json({ username, profileimage });
-  } catch (err) {
-    res.status(400).send('정보 전달 오류');
-  }
-});
-//채팅조회
-router.get('/chat/lists', async (req, res) => {
-  await Message.find().exec((err, result) => {
-    if (err) return res.send(null);
-    res.send(result);
-  });
-});
-
-
-
 
 module.exports = router;
