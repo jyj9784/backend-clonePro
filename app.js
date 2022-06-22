@@ -3,12 +3,10 @@ dotenv.config();
 const express = require('express');
 const app = express();
 const connect = require('./schemas/db');
-const nodemailer = require('nodemailer');
 const cors = require('cors');
 const morgan = require('morgan');
 const session = require('express-session');
 const port = 3000;
-const router = express.Router();
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
 const companyRouter = require('./routes/company');
@@ -58,19 +56,12 @@ app.get('/', (req, res) => {
   res.send('헬로 월드');
 });
 
-
-// app.get('/chat', (req, res) => {
-//   res.sendFile(__dirname + '/chat.html');
-// });
-
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
-
-
-
+//실시간 채팅
 const io = new Server(server, {
   cors: {
     origin: "*",
@@ -100,7 +91,7 @@ chatspace.on("connection", (socket) => {
 });
 });
 
-
+//서버 열기
 server.listen(port, () => {
   console.log(port, '포트가 켜졌습니다.');
 });

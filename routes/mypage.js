@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middlewares/auth-middleware');
 
+//북마크 on/off , 마이페이지에 채용정보 담거나 빼기.
 router.put('/mark/:postingid', authMiddleware, async (req, res) => {
   try {
     const { postingid } = req.params;
@@ -30,15 +31,15 @@ router.put('/mark/:postingid', authMiddleware, async (req, res) => {
         _id: 0,
       }
     );
-    let m = 0;
+    let temp = 0;
     const existsmarks = await Mypage.find();
 
     for (let i = 0; i < existsmarks.length; i++) {
       if (existsmarks[i].markList[0].postingid === Number(postingid)) {
-        m = 1
+        temp = 1
       }
     }
-    if (m === 1) {
+    if (temp === 1) {
       await Mypage.deleteOne({ postingid: Number(postingid) });
       res.send('북마크 off');
     } else {
@@ -53,12 +54,11 @@ router.put('/mark/:postingid', authMiddleware, async (req, res) => {
   }
 });
 
+//마이페이지 조회(북마크 목록 불러오기)
 router.get('/mypage', authMiddleware, async (req, res) => {
   try {
     const { user } = res.locals;
-    // console.log(user)
     const userId = user[0].userid;
-    console.log('userId: ', userId);
 
     const marks = await Mypage.find({ userId }).sort({ postingid: -1 });
     res.json(marks);
