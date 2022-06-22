@@ -10,7 +10,6 @@ const jwtSecret = process.env.SECRET_KEY;
 const authMiddleware = require('../middlewares/auth-middleware');
 const Bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
-const Message = require('../schemas/messages');
 
 //회원가입 검증 양식1 - 개인회원
 const postUsersSchema = Joi.object({
@@ -294,48 +293,6 @@ router.get('/userlists', async (req, res) => {
 
     user_list,
   });
-});
-//커뮤니티 페이지 조회
-router.get('/communities', authMiddleware, async (req, res) => {
-  try {
-    const { user } = res.locals;
-    const username = user[0].username;
-    const profileimage = user[0].profileimage;
-    res.json({ username, profileimage });
-  } catch (err) {
-    res.status(400).send('정보 전달 오류');
-  }
-});
-//채팅조회
-router.get('/chat/lists', async (req, res) => {
-  await Message.find().exec((err, result) => {
-    if (err) return res.send(null);
-    res.send(result);
-  });
-});
-
-router.get('/profile', authMiddleware, async (req, res) => {
-  try {
-    const { user } = res.locals;
-    const userid = user[0].userid;
-    res.json(userid);
-  } catch (err) {
-    console.log(err);
-    res.status(400).send({
-      errorMessage: '요청한 데이터 형식이 올바르지 않습니다.',
-    });
-  }
-});
-
-router.get('/communities', authMiddleware, async (req, res) => {
-  try {
-    const { user } = res.locals;
-    const username = user[0].username;
-    const profileimage = user[0].profileimage;
-    res.json({ username, profileimage });
-  } catch (err) {
-    res.status(400).send('정보 전달 오류');
-  }
 });
 
 module.exports = router;
