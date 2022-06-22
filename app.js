@@ -11,6 +11,7 @@ const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
 const comypageRouter = require('./routes/mypage_co');
 const mypageRouter = require('./routes/mypage');
+const communityRouter = require('./routes/community');
 const mainRouter = require('./routes/main');
 const G_authRouter = require('./routes/google_auth');
 const passport = require('passport');
@@ -50,9 +51,9 @@ app.use('/auth', require('./routes/google_auth'));
 app.use('/api', [
   usersRouter,
   postsRouter,
-  companyRouter,
   comypageRouter,
   mypageRouter,
+  communityRouter
 ]);
 app.use('/auth', [mainRouter, G_authRouter]);
 app.get('/', (req, res) => {
