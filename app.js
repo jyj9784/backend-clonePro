@@ -9,9 +9,10 @@ const session = require('express-session');
 const port = 3000;
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
-const companyRouter = require('./routes/company');
 const comypageRouter = require('./routes/mypage_co');
 const mypageRouter = require('./routes/mypage');
+const mainRouter = require('./routes/main');
+const G_authRouter = require('./routes/google_auth');
 const passport = require('passport');
 const { Server } = require('socket.io');
 const swaggerUi = require('swagger-ui-express');
@@ -19,8 +20,6 @@ const swaggerFile = require('./swagger_output');
 const http = require('http');
 const server = http.createServer(app);
 const Msg = require('./schemas/messages');
-const mainRouter = require('./routes/main');
-const G_authRouter = require('./routes/google_auth');
 const cookieParser = require('cookie-parser');
 
 connect();
@@ -46,11 +45,15 @@ app.use(
 // Passport setting
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Routes
 app.use('/', require('./routes/main'));
 app.use('/auth', require('./routes/google_auth'));
-app.use('/api', [usersRouter, postsRouter, companyRouter, comypageRouter, mypageRouter]);
+app.use('/api', [
+  usersRouter,
+  postsRouter,
+  companyRouter,
+  comypageRouter,
+  mypageRouter,
+]);
 app.use('/auth', [mainRouter, G_authRouter]);
 app.get('/', (req, res) => {
   res.send('헬로 월드');
@@ -64,34 +67,32 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 //실시간 채팅
 const io = new Server(server, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
+    origin: '*',
+    methods: ['GET', 'POST'],
   },
 });
 const chatspace = io.of('/chat');
-chatspace.on("connection", (socket) => {
+chatspace.on('connection', (socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on("join_room", (data) => {
+  socket.on('join_room', (data) => {
     socket.join(data);
     console.log(`User with ID: ${socket.id} joined room: ${data}`);
   });
 
-  socket.on("send_message", (data) => {
+  socket.on('send_message', (data) => {
     const message = new Msg(data);
     message.save().then(() => {
-    socket.to(data.room).emit("receive_message", data);
-    
-    console.log(data)
-  });
+      socket.to(data.room).emit('receive_message', data);
 
-  socket.on("disconnect", () => {
-    console.log("User Disconnected", socket.id);
+      console.log(data);
+    });
+
+    socket.on('disconnect', () => {
+      console.log('User Disconnected', socket.id);
+    });
   });
 });
-});
-
-//서버 열기
 server.listen(port, () => {
   console.log(port, '포트가 켜졌습니다.');
 });
