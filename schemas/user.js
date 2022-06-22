@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
   },
-  
+
   profileimage: {
     type: String,
   },
@@ -23,7 +23,6 @@ const userSchema = new mongoose.Schema({
   position: {
     type: String,
   },
-
 });
 
 module.exports = mongoose.model('User', userSchema);

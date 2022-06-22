@@ -12,7 +12,6 @@ const Bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const Message = require('../schemas/messages');
 
-
 // console.log(process.env.SECRET_KEY)
 
 //회원가입 양식
@@ -294,31 +293,29 @@ router.get('/userlists', async (req, res) => {
 //커뮤니티 페이지 조회
 router.get('/communities', authMiddleware, async (req, res) => {
   try {
-      const {user} = res.locals;
-      const username = user[0].username;
-      const profileimage = user[0].profileimage;
-      res.json({username, profileimage});
-  } catch(err) {
-      res.status(400).send("정보 전달 오류");
+    const { user } = res.locals;
+    const username = user[0].username;
+    const profileimage = user[0].profileimage;
+    res.json({ username, profileimage });
+  } catch (err) {
+    res.status(400).send('정보 전달 오류');
   }
 });
 //채팅조회
 router.get('/chat/lists', async (req, res) => {
-  await Message.find()
-          .exec((err, result) => {
-              if (err) return res.send(null);
-              res.send(result);
-          });
+  await Message.find().exec((err, result) => {
+    if (err) return res.send(null);
+    res.send(result);
+  });
 });
 
-
-router.get('/profile', authMiddleware, async (req, res)=>{
+router.get('/profile', authMiddleware, async (req, res) => {
   try {
-    const {user} = res.locals;
-    console.log(user)
+    const { user } = res.locals;
+    console.log(user);
     const userid = user[0].userid;
-    console.log(userid)
-    res.json( userid );
+    console.log(userid);
+    res.json(userid);
   } catch (err) {
     console.log(err);
     res.status(400).send({
@@ -329,15 +326,15 @@ router.get('/profile', authMiddleware, async (req, res)=>{
 
 router.get('/communities', authMiddleware, async (req, res) => {
   try {
-      const {user} = res.locals;
-      console.log(user)
-      const username = user[0].username;
-      console.log(username)
-      const profileimage = user[0].profileimage;
-      console.log(profileimage)
-      res.json({username, profileimage});
-  } catch(err) {
-      res.status(400).send('정보 전달 오류');
+    const { user } = res.locals;
+    console.log(user);
+    const username = user[0].username;
+    console.log(username);
+    const profileimage = user[0].profileimage;
+    console.log(profileimage);
+    res.json({ username, profileimage });
+  } catch (err) {
+    res.status(400).send('정보 전달 오류');
   }
 });
 
