@@ -13,6 +13,7 @@ const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
 const companyRouter = require('./routes/company');
 const comypageRouter = require('./routes/mypage_co');
+const mypageRouter = require('./routes/mypage');
 const passport = require('passport');
 const { Server } = require('socket.io');
 const swaggerUi = require('swagger-ui-express');
@@ -51,7 +52,7 @@ app.use(passport.session());
 // Routes
 app.use('/', require('./routes/main'));
 app.use('/auth', require('./routes/google_auth'));
-app.use('/api', [usersRouter, postsRouter, companyRouter, comypageRouter]);
+app.use('/api', [usersRouter, postsRouter, companyRouter, comypageRouter, mypageRouter]);
 app.use('/auth', [mainRouter, G_authRouter]);
 app.get('/', (req, res) => {
   res.send('헬로 월드');

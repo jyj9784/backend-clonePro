@@ -64,7 +64,7 @@ const PostSchema = new mongoose.Schema(
     position: {
       type: String,
       required: true,
-    },
+    }
 
     // createdAt, updatedAt 자동설정
   },
