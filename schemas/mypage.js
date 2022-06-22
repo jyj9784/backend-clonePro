@@ -4,7 +4,7 @@ const MypageSchema = new mongoose.Schema({
         type: String,
     },
     markList: {
-        type: Object 
+        type: Array 
     }
 });
 module.exports = mongoose.model('mypage', MypageSchema);
