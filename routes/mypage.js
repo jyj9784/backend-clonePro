@@ -26,22 +26,28 @@ router.put('/mark/:postingid', authMiddleware, async (req, res) => {
         position: 1,
         intro: 1,
         address: 1,
+        status: 1,
         _id: 0,
       }
     );
+    let m = 0;
     const existsmarks = await Mypage.find();
 
     for (let i = 0; i < existsmarks.length; i++) {
       if (existsmarks[i].markList[0].postingid === Number(postingid)) {
-        await Mypage.deleteOne({ postingid: Number(postingid) });
-        res.send('삭제시킴.');
+        m = 1;
       }
     }
-    await Mypage.create({
-      userid,
-      markList,
-    });
-    res.send({ success: true });
+    if (m === 1) {
+      await Mypage.deleteOne({ postingid: Number(postingid) });
+      res.send('삭제시킴.');
+    } else if (m === 0) {
+      await Mypage.create({
+        userid,
+        markList,
+      });
+      res.send({ success: true });
+    }
   } catch (err) {
     res.status(400).send('마크 오류');
   }
