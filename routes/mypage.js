@@ -35,7 +35,7 @@ router.put('/mark/:postingid', authMiddleware, async (req, res) => {
 
     for (let i = 0; i < existsmarks.length; i++) {
       if (existsmarks[i].markList[0].postingid === Number(postingid)) {
-        m = 1
+        m = 1;
       }
     }
     if (m === 1) {
@@ -56,7 +56,6 @@ router.put('/mark/:postingid', authMiddleware, async (req, res) => {
 router.get('/mypage', authMiddleware, async (req, res) => {
   try {
     const { user } = res.locals;
-    // console.log(user)
     const userId = user[0].userid;
     console.log('userId: ', userId);
 

@@ -11,7 +11,6 @@ const port = 3000;
 const router = express.Router();
 const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
-const companyRouter = require('./routes/company');
 const comypageRouter = require('./routes/mypage_co');
 const mypageRouter = require('./routes/mypage');
 const mainRouter = require('./routes/main');

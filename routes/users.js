@@ -318,8 +318,16 @@ router.get('/profile', authMiddleware, async (req, res) => {
 router.get('/communities', authMiddleware, async (req, res) => {
   try {
     const { user } = res.locals;
+<<<<<<< HEAD
     const username = user[0].username;
     const profileimage = user[0].profileimage;
+=======
+    console.log(user);
+    const username = user[0].username;
+    console.log(username);
+    const profileimage = user[0].profileimage;
+    console.log(profileimage);
+>>>>>>> ce404e9d07921902c74a7ea82f4d1d5d611b2d11
     res.json({ username, profileimage });
   } catch (err) {
     res.status(400).send('정보 전달 오류');
