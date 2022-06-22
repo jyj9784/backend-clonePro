@@ -1,15 +1,16 @@
-var express = require('express');
-var router = express.Router();
-var passport = require('../config/passport.js');
+const express = require('express');
+
+const router = express.Router();
+const passport = require('../config/passport.js');
 
 // 로그인 API
 
-router.get('/login', function (req, res) {
+router.get('/login', (req, res) => {
   res.render('auth/login');
 });
 
 // 로그아웃 API
-router.get('/logout', function (req, res) {
+router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
