@@ -50,7 +50,7 @@ app.use('/auth', require('./routes/google_auth'));
 app.use('/api', [
   usersRouter,
   postsRouter,
-  companyRouter,
+  // comypanyRouter,
   comypageRouter,
   mypageRouter,
 ]);
