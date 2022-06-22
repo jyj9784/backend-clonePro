@@ -65,6 +65,10 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // 채용공고 상태
+    status: {
+      type: Boolean,
+    },
 
     // createdAt, updatedAt 자동설정
   },

@@ -17,5 +17,5 @@
 /models
 /passport
 
-
-.eslintrc.js
+/chat.html
+/socket.js

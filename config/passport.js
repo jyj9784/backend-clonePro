@@ -17,14 +17,11 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: 'http://localhost:3000/auth/google/callback',
+      callbackURL: 'http://hayeon-sum.shop/auth/google/callback',
       passReqToCallback: true,
     },
     async (request, accessToken, refreshToken, profile, done) => {
-      console.log('profile: ', profile);
-
-      var user = profile;
-
+      let user = profile;
       const userid = 'abc' + user.id.slice(0, 7);
       const username = user.given_name;
       const profileimage = user.picture;
