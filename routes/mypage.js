@@ -40,13 +40,13 @@ router.put('/mark/:postingid', authMiddleware, async (req, res) => {
     }
     if (m === 1) {
       await Mypage.deleteOne({ postingid: Number(postingid) });
-      res.send(`${postingid} 삭제됨.`);
+      res.send('북마크 off');
     } else {
       await Mypage.create({
         userid,
         markList,
       });
-      res.send({ postingid, success: true });
+      res.send('북마크 on');
     }
   } catch (err) {
     res.status(400).send('마크 오류');
