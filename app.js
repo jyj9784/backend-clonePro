@@ -104,12 +104,6 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 // // })
 // =======
 
-
-
-
-
-
-
 // // ------------
 // io.on('connection', (socket) => {
 //   socket.on('disconnect', () => {
@@ -132,9 +126,9 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 //     });
 // >>>>>>> main
 
-  });
+//   });
 
-})
+// })
 
 // app.get('/chat', (req, res) => {
 //   res.sendFile(__dirname + '/chat.html');
@@ -169,6 +163,4 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 server.listen(port, () => {
   console.log(port, '포트가 켜졌습니다.');
-
 });
-
