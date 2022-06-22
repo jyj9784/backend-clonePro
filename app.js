@@ -16,7 +16,7 @@ const G_authRouter = require('./routes/google_auth');
 const passport = require('passport');
 const { Server } = require('socket.io');
 const swaggerUi = require('swagger-ui-express');
-const swaggerFile = require('./swagger_output')
+const swaggerFile = require('./swagger_output');
 const http = require('http');
 const server = http.createServer(app);
 const Msg = require('./schemas/messages');
@@ -102,7 +102,7 @@ chatspace.on('connection', (socket) => {
 });
 
 app.get('/', (req, res) => {
-  res.send('헬로 월드');
+  res.send('<조세림 전영준 김하연> 4조 원티드 조 백엔드 서버입니다 :)');
 });
 server.listen(port, () => {
   console.log(port, '포트가 켜졌습니다.');
