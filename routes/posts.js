@@ -20,7 +20,7 @@ router.post('/postings', authMiddlewareCo, async (req, res) => {
     const address = user[0].address;
     const country = user[0].country;
     const region = user[0].region;
-    console.log(country);
+    let status = true;
     // console.log(userid)
     // postingid 자동으로 생성되게 설정
     const maxpostingid = await Post.findOne().sort('-postingid');
@@ -47,6 +47,7 @@ router.post('/postings', authMiddlewareCo, async (req, res) => {
       maincontent,
       subcontent,
       position,
+      status
     });
     // console.log(recruit)
     res.status(200).send({
@@ -81,6 +82,28 @@ router.put('/postings/:postingid', authMiddlewareCo, async (req, res) => {
   }
 });
 
+// 채용정보 상태 수정(기업회원 로그인 시 가능)
+router.patch('/postings/:postingid', authMiddlewareCo, async (req, res) => {
+  try {
+    const { postingid } = req.params;
+    // console.log(postingid)
+    const { status } = req.body;
+    const { user } = res.locals;
+    const userid = user[0].userid;
+    // console.log(userid)
+    const list = await Post.findOne({ postingid });
+    // console.log(list)
+    if (userid === list.userid) {
+      await Post.updateOne({ postingid }, { $set: req.body });
+      res.status(201).send({ success: true });
+    } else {
+      res.status(403).send('상태 수정 권한이 없습니다.');
+    }
+  } catch {
+    res.status(400).send('채용정보 수정 오류');
+  }
+});
+
 // 채용정보 삭제(기업회원 로그인 시 가능)
 router.delete('/postings/:postingid', authMiddlewareCo, async (req, res) => {
   try {
@@ -104,7 +127,7 @@ router.delete('/postings/:postingid', authMiddlewareCo, async (req, res) => {
 // 채용정보 전체조회(로그인 안되도 다 볼 수 있게)
 router.get('/postings', async (req, res) => {
   try {
-    const posts = await Post.find({}).sort({ postingid: -1 });
+    const posts = await Post.find({ status: true }).sort({ postingid: -1 });
     console.log(posts);
     const companyinfo = await CompanyUser.find(
       {},
