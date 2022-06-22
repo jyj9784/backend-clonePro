@@ -36,6 +36,8 @@ router.put('/mark/:postingid', authMiddleware, async (req, res) => {
       if (existsmarks[i].markList[0].postingid === Number(postingid)) {
         await Mypage.deleteOne({ postingid: Number(postingid) });
         res.send('삭제시킴.');
+      } else {
+        Mypage.create({ userid, markList });
       }
     }
   } catch (err) {
