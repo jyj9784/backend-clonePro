@@ -116,9 +116,12 @@
   <img src="https://img.shields.io/badge/Express-7b7b7b?style=for-the-badge&logo=Express&logoColor=black">
   <img src="https://img.shields.io/badge/MongoDB-3e2d1d?style=for-the-badge&logo=MongoDB&logoColor=green">
   <br>
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
   <img src="https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=Socket.io&logoColor=white">
   <img src="https://img.shields.io/badge/prettier-192932?style=for-the-badge&logo=prettier&logoColor=black">
   <img src="https://img.shields.io/badge/swagger-80b43c?style=for-the-badge&logo=swagger&logoColor=black">
+    <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
 
 
 <br>
