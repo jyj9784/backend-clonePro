@@ -78,12 +78,12 @@ chatspace.on('connection', (socket) => {
 
   socket.on('send_message', (data) => {
     const message = new Msg(data);
-    message.save().then(() => {
+    message.save()
       socket.to(data.room).emit('receive_message', data);
       console.log('data: ', data);
       console.log('data.room: ', data.room);
 
-    });
+    
 
     socket.on('disconnect', () => {
       console.log('User Disconnected', socket.id);
