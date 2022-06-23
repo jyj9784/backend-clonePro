@@ -1,7 +1,7 @@
 <h1 align="left"><br/>원티드 클론 프로젝트</h1>
 <br>
 <p align='center'>
-<img width='70%' src='https://thumb1.photo.mybox.naver.com/3472480173544228924?type=m1280_1280_2&nocache=2400142306'>
+<img width='70%' src=''>
 </p>
 <p align='center'>
  <img src='https://img.shields.io/badge/Node-version1111-green?logo=Node.js'/>
