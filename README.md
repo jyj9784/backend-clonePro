@@ -81,6 +81,7 @@
 <summary>--------</summary>
 <div markdown="1">
 <br>
+</details>
   
 
 
@@ -92,15 +93,7 @@
 <br>
   
 
-</div>
-</details>
-<details>
-<summary>-----</summary>
-<div markdown="1">
-<br>
 
-
-<br>
 
 ## 기술스택
 > #### 프론트엔드
