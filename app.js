@@ -91,8 +91,9 @@ chatspace.on('connection', (socket) => {
     const message = new Msg(data);
     message.save().then(() => {
       socket.to(data.room).emit('receive_message', data);
+      console.log('data: ', data);
+      console.log('data.room: ', data.room);
 
-      console.log(data);
     });
 
     socket.on('disconnect', () => {
