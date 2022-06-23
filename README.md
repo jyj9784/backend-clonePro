@@ -1,7 +1,7 @@
 <h1 align="left"><br/>원티드 클론 프로젝트</h1>
 <br>
 <p align='center'>
-<img width='70%' src='/Users/selim/Downloads/클론코딩 썸네일1-001.png'>
+<img width='70%' src=''>
 </p>
 <p align='center'>
  <img src='https://img.shields.io/badge/Node-version1111-green?logo=Node.js'/>
