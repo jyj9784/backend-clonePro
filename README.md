@@ -45,7 +45,7 @@
 ## ⚙️ 주요 구현 기능
 
 <details>
-<summary>1. 로그인</summary>
+<summary>-------</summary>
 <div markdown="1">
 <br>
   
@@ -54,79 +54,51 @@
 </div>
 </details>
 <details>
-<summary>2. 필터링 및 방만들기</summary>
+<summary>----</summary>
 <div markdown="1">
 <br>
   
-+ 난이도, 운동 종류에 따라 방을 개설하고, 필터링 기능을 통해 찾을 수 있습니다.
-+ 영상 추천 기능을 도입해 유저가 좀 더 간편하게 방을 만들 수 있게 했습니다.
-
-![필터링및방만들기배속2](https://user-images.githubusercontent.com/89131236/161430255-88cdeac0-35f0-4d8f-b244-9255b7e2a779.gif)
 
 </div>
 </details>
 <details>
-<summary>3. 비밀방 및 링크공유</summary>
+<summary>--------</summary>
 <div markdown="1">
 <br>
    
-+ 비밀방 및 링크공유 기능을 도입해, 친구와 함께 더 잘 이용할 수 있는 환경을 제공했습니다.
 
-![비밀방및링크공유배속](https://user-images.githubusercontent.com/89131236/161424828-456a41d4-d473-4bde-a438-a2d79c337d03.gif)
 
 </div>
 </details>
 <details>
-<summary>4. 화상채팅</summary>
+<summary>-------</summary>
 <div markdown="1">
-<br>
-  
-   + 사용자들간의 화상채팅을 이용할 때, 카메라 끄기, 음소기 하기, 격려하기(이모티콘) 등의 기능을 통해,
-<br> 자신이 원하는 대로 사용할 수 있습니다.
 
-![기능소개_화상채팅](https://user-images.githubusercontent.com/98517680/161428260-e7cc7154-e265-4839-8e62-dfa6217d776a.gif)
   
 </div>
 </details>
 <details>
-<summary>5. 유튜브영상 및 프로그래스바</summary>
+<summary>--------</summary>
 <div markdown="1">
 <br>
   
-   + 사용자가 처음 방을 만들 때 지정한 영상을 보면서 다같이 운동을 할 수 있습니다.
-+ 현재 영상의 진행 상황에 따라 영상 위쪽에 위치한 프로그래스바를 통해 현재 진행 상황을 시각적으로 확인할 수 있습니다.
-+ 또한 시간이 맞추어 사용자들에게 동기부여가 될 수 있는 여러가지 멘트들이 보일 수 있도록 하였습니다.
-+ 운동이 끝나게 되면, 운동을 완료했다는 모달이 뜨면서 운동을 마무리 할 수 있습니다.
 
-![기능소개_영상 프로그래스바](https://user-images.githubusercontent.com/98517680/161428860-6144a30a-3817-4a1d-9064-7ad145671c82.gif)
 
 </div>
 </details>
 <details>
-<summary>6. 운동기록 및 마이페이지</summary>
+<summary>-------</summary>
 <div markdown="1">
 <br>
   
-   + 사용자가 해당 서비스를 이용하며, 운동을 지속할 수 있는 장치를 마련했습니다.
-+ 마이페이지에서 사용자의 닉네임 및 목표설정을 변경할 수 있습니다.
-+ 운동을 완료하고 나면, 축하메시지와 함께 운동기록이 저장됩니다.
-+ 메인페이지에서 운동랭킹, 이만큼 운동했어요, 캘린더출석, 이런운동을많이했어요 탭에서 반영됩니다.
 
-![운동기록및마이페이지배속](https://user-images.githubusercontent.com/89131236/161427704-b49f420e-6cbe-42be-95f7-939dfcc56ce9.gif)
 </div>
 </details>
 <details>
-<summary>7. 반응형</summary>
+<summary>-----</summary>
 <div markdown="1">
 <br>
-  
- + 홈트게더는 태블릿 가로형 및 PC에 최적화되어 있습니다.
- + 모바일로 접속 시에는 PC로 쉽게 이동할 수 있도록, 카카오톡 공유하기 기능을 도입했습니다.
 
-![반응형배속](https://user-images.githubusercontent.com/89131236/161423917-e63a4981-b62b-4b46-b6cf-11e26b1b23d9.gif)
-<img height='304px' src='https://user-images.githubusercontent.com/89131236/161428194-bd44b026-a24b-4154-b392-fcb6b1b3193e.png'>
-</div>
-</details>
 
 <br>
 
