@@ -1,7 +1,7 @@
 <h1 align="left"><br/>원티드 클론 프로젝트</h1>
 <br>
 <p align='center'>
-<img width='70%' src=''>
+<img width='70%' src='/Users/selim/Downloads/클론코딩 썸네일1-001.png'>
 </p>
 <p align='center'>
  <img src='https://img.shields.io/badge/Node-version1111-green?logo=Node.js'/>
@@ -203,7 +203,7 @@
 
 | Name     | GitHub                             | Position  |
 | -------- | ---------------------------------- | --------- |
-| 조세림🔰   |         | 백엔드 |
+| 조세림🔰   |  https://github.com/selim-jo      | 백엔드 |
 | 전영준   |    https://github.com/jyj9784       | 백엔드 |
 | 김하연   |   https://github.com/HayeonKimm     | 백엔드 |
 | 조세림   |        | 백엔드  |
