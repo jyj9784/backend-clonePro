@@ -122,6 +122,7 @@
   <img src="https://img.shields.io/badge/prettier-192932?style=for-the-badge&logo=prettier&logoColor=black">
   <img src="https://img.shields.io/badge/swagger-80b43c?style=for-the-badge&logo=swagger&logoColor=black">
     <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+    <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white">
 
 
 <br>
