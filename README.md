@@ -38,7 +38,7 @@
 <details markdown="2">
 <summary>API 명세서</summary>
   
-![API 명세서](https://www.notion.so/4-e1ca3a0316e4459d80cc08793e2d1556)
+[https://www.notion.so/4-e1ca3a0316e4459d80cc08793e2d1556](https://www.notion.so/acb268ccf9ab4d139f62f086b8d3e175?v=616957780f1944fbb7dfbd57061a384e])
 
 </details>
 
