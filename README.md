@@ -112,6 +112,7 @@
 > #### 백엔드
   
   <p align="center">
+    <img src= "https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
   <img src="https://img.shields.io/badge/Node-42443b?style=for-the-badge&logo=Node.js&logoColor=green">
   <img src="https://img.shields.io/badge/Express-7b7b7b?style=for-the-badge&logo=Express&logoColor=black">
   <img src="https://img.shields.io/badge/MongoDB-3e2d1d?style=for-the-badge&logo=MongoDB&logoColor=green">
