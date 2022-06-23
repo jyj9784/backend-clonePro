@@ -44,52 +44,10 @@
 
 ## ⚙️ 주요 구현 기능
 
-<details>
-<summary>-------</summary>
-<div markdown="1">
-<br>
-  
-+ 사용자들의 접근성을 높이기 위해 간편한 카카오 소셜 로그인을 구현했습니다.
-<img width='600px' src='https://user-images.githubusercontent.com/89131236/161420316-475aa330-b002-4e44-8770-4279c347f78f.png'>
-</div>
-</details>
-<details>
-<summary>----</summary>
-<div markdown="1">
-<br>
-  
-
-</div>
-</details>
-<details>
-<summary>--------</summary>
-<div markdown="1">
-<br>
-   
-
-
-</div>
-</details>
-<details>
-<summary>-------</summary>
-<div markdown="1">
 
   
-</div>
-</details>
 
 
-<details>
-<summary>--------</summary>
-<div markdown="1">
-<br>
-  </div>
-</details>
-  
-
-
-</div>
-</details>
 
 
 
