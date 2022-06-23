@@ -11,7 +11,7 @@ router.post('/postings', authMiddlewareCo, postController.recruitpost)
 router.put('/postings/:postingid', authMiddlewareCo, postController.recruitfixment)
  
 // 채용정보 상태 수정(기업회원 로그인 시 가능)
-router.patch('/postings/:postingid', authMiddlewareCo, postController.recruitstatusfixment) 
+router.patch('/postings/status/:postingid', authMiddlewareCo, postController.recruitstatusfixment) 
   
 // 채용정보 삭제(기업회원 로그인 시 가능)
 router.delete('/postings/:postingid', authMiddlewareCo, postController.recruitdelete) 
