@@ -32,7 +32,7 @@
 <details markdown="1">
 <summary>구현 화면</summary>
 
-![서비스 아키텍처 (1)](https://user-images.githubusercontent.com/89131236/162146016-6a65a78e-00f8-477d-8308-3e1ab4ed75e6.png)
+![서비스 아키텍처 (1)]()
 </details>
 
 <details markdown="2">
