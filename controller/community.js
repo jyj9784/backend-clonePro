@@ -10,6 +10,7 @@ async function communitypage(req, res) {
     res.status(400).send('정보 전달 오류');
   }
 }
+
 async function getchat(req, res) {
   await Message.find().exec((err, result) => {
     if (err) return res.send(null);

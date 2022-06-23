@@ -21,5 +21,5 @@ const msgSchema = new mongoose.Schema({
     required: true,
   },
 });
-const Msg = mongoose.model('msg', msgSchema);
+const Msg = mongoose.model(`msg`, msgSchema);
 module.exports = Msg;
