@@ -3,58 +3,46 @@
 <p align='center'>
 <img width='50%' src='https://www.venturesquare.net/wp-content/uploads/2022/02/%EC%9B%90%ED%8B%B0%EB%93%9C%EB%9E%A9-789x404.jpg'>
 </p>
-<p align='center'>
- <img src='https://img.shields.io/badge/Node-version1111-green?logo=Node.js'/>
-  <img src='https://img.shields.io/badge/Express-v4.17.3-black?logo=Express'/>
-  <img src='https://img.shields.io/badge/MongoDB-version111-green?logo=mongodb'/>
-  <img src='https://img.shields.io/badge/socket.io-v4.4.1-white?logo=Socket.io'/>
-  <img src='https://img.shields.io/badge/prettier-v2.5.1-pink?logo=prettier'/>
-  <img src='https://img.shields.io/badge/mocha-v9.2.2-brown?logo=mocha'/>
-  <img src='https://img.shields.io/badge/chai-v4.3.6-red?logo=chai'/>
-  <img src='https://img.shields.io/badge/swagger-API-brightgreen?logo=swagger'/>
-  <img src='https://img.shields.io/badge/eslint-v8.11.0-purple?logo=eslint'/>
-</p>
 <br>
-
 
 ## 📌 바로가기
-- 사이트 바로가기 : https://htgather.com
-- 프론트엔드 GitHub Repository : https://github.com/htgather/Team-htgather-frontend
-- 백엔드 GitHub Respository : https://github.com/htgather/Team-htgather-backend
-- 시연 영상 보러가기: https://www.youtube.com/watch?v=MHotySs09E4&t=1s
+- 사이트 바로가기 : 
+- 프론트엔드 GitHub Repository : https://github.com/itsstacy/wanted-clone
+- 백엔드 GitHub Respository : https://github.com/HayeonKimm/backend-clonePro
+- 시연 영상 보러가기: 
 
 <br>
 
-## 프로젝트 기간
->2월25일 부터 4월8일 까지(6주)
+## 👨‍💻 프로젝트 기간 및 참여인원
+2022.06.17.(금) ~ 2022.06.23.(목)</br>
+
+
+| Name     | GitHub                             | Position  |
+| -------- | ---------------------------------- | --------- |
+| 조세림     |  https://github.com/selim-jo       | 백엔드 |
+| 전영준     |  https://github.com/jyj9784        | 백엔드 |
+| 김하연     |  https://github.com/HayeonKimm     | 백엔드 |
+| 권지은     |  https://github.com/itsstacy       | 프론트 |
+| 최서우     |  https://github.com/zerovodka      | 프론트 |
 
 <br>
 
-##  홈트게더 서비스 소개
-### :runner:유튜브 영상과 함께 하는 홈트레이닝에 참여해보세요.
-> - 화상캠을 통해 비대면에서도, 함께 운동하는 기분을 느껴보세요.
-> - 다 같이 하나의 유튜브 운동 영상으로 운동해봐요.
-### ✔️ 간편하게 나의 수준에 맞는 운동을 찾아보세요.
-> - 난이도, 운동 종류에 따라 나에게 맞는 방을 찾거나 개설할 수 있어요.
-> - 내가 마지막으로 했던 운동 영상, 현재 TOP3 영상을 추천해줘요. 
-### 🏆 친구와 함께 운동해보세요.
-> - 비밀방 기능을 통해, 친구끼리 운동할 수 있어요.
-> - 링크복사 버튼을 통해 간편하게 친구를 초대해보세요.
-### :date: 운동을 완료하고, 나만의 기록을 남겨보세요.
-> - 달력스탬프, 랭킹, 통계시스템을 통해, 동기부여를 하고, 운동을 지속하게 해줘요. 
+## 프로젝트 구조
 
-<br>
+<details markdown="1">
+<summary>구현 화면</summary>
 
-## <a href="https://github.com/fancyers/work-out-at-home-BE/wiki">기술 및 고민 정리 - WIKI 바로가기</a>
+![서비스 아키텍처 (1)](https://user-images.githubusercontent.com/89131236/162146016-6a65a78e-00f8-477d-8308-3e1ab4ed75e6.png)
+</details>
 
-<br>
+<details markdown="2">
+<summary>API 명세서</summary>
+  
+![API 명세서](https://www.notion.so/4-e1ca3a0316e4459d80cc08793e2d1556)
 
+</details>
 
-
-
-
-
-## 주요 기능
+## ⚙️ 주요 구현 기능
 
 <details>
 <summary>1. 로그인</summary>
@@ -140,45 +128,19 @@
 </div>
 </details>
 
-
-
-<br>
-
-
-## 프로젝트 구조
-
-
-<details markdown="1">
-<summary>서비스 아키텍처</summary>
-
-![서비스 아키텍처 (1)](https://user-images.githubusercontent.com/89131236/162146016-6a65a78e-00f8-477d-8308-3e1ab4ed75e6.png)
-</details>
-
-<details markdown="2">
-<summary>API 명세서</summary>
-  
-![swagger](https://user-images.githubusercontent.com/92852591/161463082-1570cccf-17db-4f7c-9d53-68946d19e7ab.png)
-
-</details>
-
 <br>
 
 ## 기술스택
 > #### 프론트엔드
 <p align="center">
-<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
-  <img src="https://img.shields.io/badge/github actions-2088FF?style=for-the-badge&logo=github actions&logoColor=white">  
-<br>
 <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white">
 <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
 <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
 <br>
-<img src="https://img.shields.io/badge/WebRTC-333333?style=for-the-badge&logo=WebRTC&logoColor=white">
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=Socket.io&logoColor=white">
-<img src="https://img.shields.io/badge/CloudFront-D05C4B?style=for-the-badge&logo=CloudFront&logoColor=white">
-<img src="https://img.shields.io/badge/Route53-E68B49?style=for-the-badge&logo=Route53s&logoColor=white">
 <img src="https://img.shields.io/badge/S3-569A31?style=for-the-badge&logo=S3&logoColor=white">
 <br>
 <br>
@@ -193,22 +155,7 @@
   <br>
   <img src="https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=Socket.io&logoColor=white">
   <img src="https://img.shields.io/badge/prettier-192932?style=for-the-badge&logo=prettier&logoColor=black">
-  <img src="https://img.shields.io/badge/mocha-835e40?style=for-the-badge&logo=mocha&logoColor=white">
   <img src="https://img.shields.io/badge/swagger-80b43c?style=for-the-badge&logo=swagger&logoColor=black">
 
 
 <br>
-
-## 팀원소개
-
-| Name     | GitHub                             | Position  |
-| -------- | ---------------------------------- | --------- |
-| 조세림🔰   |  https://github.com/selim-jo      | 백엔드 |
-| 전영준   |    https://github.com/jyj9784       | 백엔드 |
-| 김하연   |   https://github.com/HayeonKimm     | 백엔드 |
-| 조세림   |        | 백엔드  |
-| 권지은  |         | 프론트    |
-| 최서우   |       | 프론트     |
-
-
-<br />
