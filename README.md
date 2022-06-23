@@ -1,7 +1,7 @@
 <h1 align="left"><br/>원티드 클론 프로젝트</h1>
 <br>
 <p align='center'>
-<img width='70%' src=''>
+<img width='50%' src='https://www.venturesquare.net/wp-content/uploads/2022/02/%EC%9B%90%ED%8B%B0%EB%93%9C%EB%9E%A9-789x404.jpg'>
 </p>
 <p align='center'>
  <img src='https://img.shields.io/badge/Node-version1111-green?logo=Node.js'/>
