@@ -12,11 +12,12 @@ async function communitypage(req, res) {
 }
 
 async function getchat(req, res) {
-  Message.find().exec((err, result).then(()=> {
-    if (err)
-      return res.send(null);
-    res.send(result);
-  }));
+  try {
+    const message = await Message.find();
+    res.send(message);
+  } catch (err) {
+    res.status(400).send('대화내용 조회 오류');
+  }
 }
 
 module.exports = {
