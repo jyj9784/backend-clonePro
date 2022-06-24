@@ -10,7 +10,7 @@ router.get('/login', (req, res) => {
 });
 
 // 로그아웃 API
-router.get('/logout', (req, res) => {
+router.get('/logout_', (req, res) => {
   req.logout();
   res.redirect('/');
 });
@@ -22,7 +22,7 @@ router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
 router.get('/google/callback', passport.authenticate('google'), authSuccess);
 
 function authSuccess(req, res) {
-  res.redirect('/');
+  res.redirect('/main');
 }
 
 module.exports = router;
